@@ -7,21 +7,21 @@ namespace Code.Projects.States;
 
 public class LoadGameState : NoPayloadState
 {
+  private const string GameScreenScenePath = "res://Scenes/Game.tscn";
+  
   private readonly IStateMachine _stateMachine;
   private readonly ISceneLoader _sceneLoader;
-  private readonly ILevelDataProvider _levelDataProvider;
 
-  public LoadGameState(IStateMachine stateMachine, ISceneLoader sceneLoader, ILevelDataProvider levelDataProvider)
+  public LoadGameState(IStateMachine stateMachine, ISceneLoader sceneLoader)
   {
     _stateMachine = stateMachine;
     _sceneLoader = sceneLoader;
-    _levelDataProvider = levelDataProvider;
   }
 
   protected override async void OnEnter()
   {
     _sceneLoader.UnloadAllScenes();
-    await _sceneLoader.LoadSceneAsync("");//_levelDataProvider.SceneName);
+    await _sceneLoader.LoadSceneAsync(GameScreenScenePath);
     _stateMachine.Enter<GameState>();
   }
 }

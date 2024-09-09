@@ -32,7 +32,7 @@ namespace Code.Levels.UI.LevelsButton
       LevelConfig levelConfig = _staticDataService.GetLevelConfig(view.Level);
       view.Button.Text = levelConfig.Name;
       view.Button.Pressed += () => { OnLevelButtonClick(levelConfig.Number); };
-      view.Button.Disabled = levelConfig.Number <= _persistentDataProvider.ProgressData.LastUnlockedLevel;
+      view.Button.Disabled = levelConfig.Number > _persistentDataProvider.ProgressData.LastUnlockedLevel;
     }
 
     public void OnDetach(LevelButtonUiView view)

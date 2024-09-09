@@ -1,10 +1,9 @@
-using Code.Infrastructure.UI;
 using Code.Infrastructure.Windows;
 using Godot;
 
-namespace Code.SettingWindow;
+namespace Code.SettingsWindow;
 
-public partial class SettingWindowView : TBaseWindow<SettingWindowView>
+public partial class SettingsWindowView : TBaseWindow<SettingsWindowView>
 {
   [ExportCategory("Title")]
   [Export] public Label Title { get; private set; }

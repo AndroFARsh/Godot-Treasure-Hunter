@@ -2,6 +2,8 @@ using Code.Common.Curtains;
 using Code.Common.Extensions;
 using Code.Common.View.Factories;
 using Code.Credits.UI.About;
+using Code.Gameplay.HUD;
+using Code.Gameplay.Windows.MenuWindow;
 using Code.Home.UI.MainMenu;
 using Code.Infrastructure.EntityFactories;
 using Code.Infrastructure.Identifiers;
@@ -26,7 +28,7 @@ using Code.Levels.UI.LevelsButton;
 using Code.Levels.UI.LevelsMenu;
 using Code.Projects.Config;
 using Code.Projects.EntryPoint;
-using Code.SettingWindow;
+using Code.SettingsWindow;
 using Ninject.Modules;
 using Ninject.Syntax;
 
@@ -43,8 +45,8 @@ namespace Code.Projects.Modules
       
       BindStateMachine(this);
 
-      BindUIViewPresenters(this);
-      BindUIFactories(this);
+      BindUiViewPresenters(this);
+      BindUiFactories(this);
 
       BindGameplayServices(this);
       // RegisterGameplayServices(builder);
@@ -109,22 +111,24 @@ namespace Code.Projects.Modules
       binder.Bind<IWindowFactory>().To<WindowFactory>().InSingletonScope();
     }
     
-    private static void BindUIFactories(IBindingRoot binder)
+    private static void BindUiFactories(IBindingRoot binder)
     {
       binder.Bind<ILevelButtonFactory>().To<LevelButtonFactory>().InSingletonScope();
     }
     
-    private static void BindUIViewPresenters(IBindingRoot binder)
+    private static void BindUiViewPresenters(IBindingRoot binder)
     {
       binder.BindInterfacesTo<MainMenuUiPresenter>().InSingletonScope();
-      binder.BindInterfacesTo<SettingsWindowPresenter>().InSingletonScope();
       
       binder.BindInterfacesTo<LevelsMenuUiPresenter>().InSingletonScope();
       binder.BindInterfacesTo<LevelButtonUiPresenter>().InSingletonScope();
          
       binder.BindInterfacesTo<AboutUiPresenter>().InSingletonScope();
       
-      //   builder.Register<GameplayHUDPresenter>(Lifetime.Singleton).AsImplementedInterfaces();
+      binder.BindInterfacesTo<SettingsWindowPresenter>().InSingletonScope();
+      binder.BindInterfacesTo<GameMenuWindowPresenter>().InSingletonScope();
+      
+      binder.BindInterfacesTo<GameHUDPresenter>().InSingletonScope();
     }
     //
     // private static void RegisterUIViewServices(IContainerBuilder builder)

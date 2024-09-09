@@ -31,7 +31,7 @@ public class GameState : EndOfFrameNoPayloadState
     // _feature = _systemFactory.Create<GameplayFeature>();
     // _feature.Initialize();
     //
-    // _curtainService.Hide().Forget();
+    _curtainService.HideCurtain().Forget();
   }
 
   protected override void OnTick()
