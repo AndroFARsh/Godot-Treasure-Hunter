@@ -1,23 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://be5tyjrmu1qra"]
 
 [ext_resource type="FontFile" uid="uid://cd6wy8ohnj356" path="res://Resources/Fonts/ThaleahFat_TTF.ttf" id="1_43jpj"]
-[ext_resource type="Script" path="res://Code/SettingWindow/SettingWindowView.cs" id="1_y5msw"]
+[ext_resource type="Script" path="res://Code/SettingsWindow/SettingsWindowView.cs" id="1_y5msw"]
 
 [node name="SettingsWindow" type="Control" node_paths=PackedStringArray("Title", "Music", "Effect", "Credits", "Back", "Save")]
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -153.0
-offset_top = -129.0
-offset_right = 247.0
-offset_bottom = 133.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 262.0
+size_flags_horizontal = 0
 script = ExtResource("1_y5msw")
 Title = NodePath("MarginContainer/VBoxContainer/Label")
 Music = NodePath("MarginContainer/VBoxContainer/GridContainer/MusicValue")
@@ -33,7 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.383597, 0.383597, 0.383597, 1)
+color = Color(0.12549, 0.12549, 0.12549, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -55,6 +47,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_43jpj")
 theme_override_font_sizes/font_size = 25
 text = "Settings
+
 "
 horizontal_alignment = 1
 

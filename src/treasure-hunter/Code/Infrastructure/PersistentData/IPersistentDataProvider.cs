@@ -1,15 +1,14 @@
 using Code.Infrastructure.PersistentData.Data;
 
-namespace Code.Infrastructure.PersistentData
-{
-  public interface IPersistentDataProvider
-  {
-    SettingsData SettingsData { get; }
-    
-    ProgressData ProgressData { get; }
+namespace Code.Infrastructure.PersistentData;
 
-    void SetProgressData(ProgressData data);
+public interface IPersistentDataProvider
+{
+  SettingsData SettingsData { get; }
     
-    void SetSettingsData(SettingsData data);
-  }
+  ProgressData ProgressData { get; }
+
+  void SetProgressData(ProgressData data);
+    
+  void SetSettingsData(SettingsData data);
 }

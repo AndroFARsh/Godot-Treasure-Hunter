@@ -1,7 +1,5 @@
 using Code.Infrastructure.Instantioator;
 using Code.Levels.UI.LevelsButton;
-using Godot;
-using Ninject.Parameters;
 
 namespace Code.Levels.UI.Factories
 {

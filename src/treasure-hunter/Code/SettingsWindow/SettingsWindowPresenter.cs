@@ -3,9 +3,9 @@ using Code.Infrastructure.UI;
 using Code.Infrastructure.Windows.Services;
 using Code.Projects.States;
 
-namespace Code.SettingWindow
+namespace Code.SettingsWindow
 {
-  public class SettingsWindowPresenter : IUiViewPresenter<SettingWindowView>
+  public class SettingsWindowPresenter : IUiViewPresenter<SettingsWindowView>
   {
     private readonly IWindowService _windowService;
     private readonly IStateMachine _stateMachine;
@@ -16,14 +16,14 @@ namespace Code.SettingWindow
       _stateMachine = stateMachine;
     }
     
-    public void OnAttach(SettingWindowView view)
+    public void OnAttach(SettingsWindowView view)
     {
       view.Credits.Pressed += OnCreditsClick;
       view.Save.Pressed += OnSaveClick;
       view.Back.Pressed += OnBackClick;
     }
 
-    public void OnDetach(SettingWindowView view)
+    public void OnDetach(SettingsWindowView view)
     {
       view.Credits.Pressed -= OnCreditsClick;
       view.Save.Pressed -= OnSaveClick;

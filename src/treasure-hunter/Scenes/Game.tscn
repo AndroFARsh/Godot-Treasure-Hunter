@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://coxth8ysvx6lh"]
+
+[ext_resource type="PackedScene" uid="uid://bpxfxyngh8is7" path="res://Resources/Prefabs/GameHUD.tscn" id="1_1jjvs"]
+[ext_resource type="PackedScene" uid="uid://ca4h7cjkuf2jj" path="res://Resources/Prefabs/WindowRoot.tscn" id="2_13b3r"]
+
+[node name="GameScreen" type="Node"]
+
+[node name="GameRoot" type="Node2D" parent="."]
+
+[node name="GameHUD" parent="." instance=ExtResource("1_1jjvs")]
+
+[node name="WindowRoot" parent="." instance=ExtResource("2_13b3r")]
+visible = false

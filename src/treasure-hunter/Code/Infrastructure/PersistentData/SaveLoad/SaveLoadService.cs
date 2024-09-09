@@ -22,6 +22,7 @@ namespace Code.Infrastructure.PersistentData.SaveLoad
     
     public void SaveSettings()
     {
+      //ProjectSettings.Sa
       // todo: save to prefs
       // PlayerPrefs.SetString(SettingsKey, _persistentProvider.SettingsData.ToJson());
       // PlayerPrefs.Save();
@@ -34,12 +35,14 @@ namespace Code.Infrastructure.PersistentData.SaveLoad
       // PlayerPrefs.Save();
     }
 
-    public void InitializeProgressData() => new ProgressData();
+    public void InitializeProgressData() => 
+      _persistentProvider.SetProgressData(new ProgressData());
       // _persistentProvider.SetProgressData(PlayerPrefs.HasKey(ProgressKey)
       //   ? PlayerPrefs.GetString(ProgressKey).FromJson<ProgressData>()
       //   : new ProgressData());
 
-      public void InitializeSettingsData() => new SettingsData();
+      public void InitializeSettingsData() =>
+        _persistentProvider.SetSettingsData(new SettingsData());
       // _persistentProvider.SetSettingsData(PlayerPrefs.HasKey(SettingsKey)
       //   ? PlayerPrefs.GetString(SettingsKey).FromJson<SettingsData>()
       //   : new SettingsData());

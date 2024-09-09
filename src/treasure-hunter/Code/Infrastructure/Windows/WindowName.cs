@@ -3,8 +3,8 @@ namespace Code.Infrastructure.Windows;
 public enum WindowName
 {
   Unknown = 0,
-  PauseWindow = 1,
+  GameMenuWindow = 1,
   GameOverWindow = 2,
-  WinWindow = 3,
+  GameWinWindow = 3,
   SettingsWindow = 4,
 }
