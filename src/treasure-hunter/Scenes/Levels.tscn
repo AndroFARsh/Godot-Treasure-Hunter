@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgkmojfi7kaf7"]
+
+[ext_resource type="PackedScene" uid="uid://b5uw68urg5x1s" path="res://Resources/Prefabs/LevelsMenu.tscn" id="1_mqu47"]
+
+[node name="LevelsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelsMenu" parent="." instance=ExtResource("1_mqu47")]
+layout_mode = 1
+offset_left = 0.0
+offset_right = 0.0

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://pfa6edybw5hh"]
+
+[ext_resource type="Script" path="res://Code/Projects/Project.cs" id="1_m4axs"]
+
+[node name="Project" type="Node" node_paths=PackedStringArray("SceneRoot", "Curtain")]
+script = ExtResource("1_m4axs")
+SceneRoot = NodePath("SceneRoot")
+Curtain = NodePath("Curtain")
+
+[node name="SceneRoot" type="Node" parent="."]
+
+[node name="Curtain" type="ColorRect" parent="."]
+visible = false
+z_index = 4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

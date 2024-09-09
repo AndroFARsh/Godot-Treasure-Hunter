@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://xtyrtkx3tep5"]
+
+[ext_resource type="PackedScene" uid="uid://ck007jirokyrt" path="res://Resources/Prefabs/MainMenu.tscn" id="2_qr3c8"]
+[ext_resource type="PackedScene" uid="uid://ca4h7cjkuf2jj" path="res://Resources/Prefabs/WindowRoot.tscn" id="4_qm6fa"]
+
+[node name="HomeScreen" type="Control" node_paths=PackedStringArray("ControlRoot")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ControlRoot = NodePath(".")
+
+[node name="MainMenu" parent="." instance=ExtResource("2_qr3c8")]
+layout_mode = 1
+
+[node name="WindowRoot" parent="." instance=ExtResource("4_qm6fa")]
+visible = false
+layout_mode = 1

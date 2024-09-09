@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://7j5y7jymffr4"]
+
+[ext_resource type="Script" path="res://Code/Common/Curtains/Configs/CurtainConfig.cs" id="1_rldyb"]
+
+[sub_resource type="Curve" id="Curve_7ym06"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8ywj8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_rldyb")
+FadeInSpeed = 1.2
+FadeInCurve = SubResource("Curve_7ym06")
+FadeOutSpeed = 1.2
+FadeOutCurve = SubResource("Curve_8ywj8")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LevelConfig" load_steps=2 format=3 uid="uid://dapfptg8vdf6h"]
+
+[ext_resource type="Script" path="res://Code/Levels/Configs/LevelConfig.cs" id="1_hmbnj"]
+
+[resource]
+script = ExtResource("1_hmbnj")
+Number = 0
+Name = "[ First ]"
