@@ -1,6 +1,6 @@
 using System;
 
-namespace Code.Infrastructure.PersistentData.Data
+namespace Code.PersistentData.Data
 {
   [Serializable]
   public class ProgressData

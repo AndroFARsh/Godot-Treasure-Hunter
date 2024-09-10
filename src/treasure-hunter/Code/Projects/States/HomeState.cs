@@ -1,3 +1,5 @@
+using Code.Audio;
+using Code.Audio.Services;
 using Code.Common.Curtains;
 using Code.Home;
 using Code.Infrastructure.States.Infrastructure;
@@ -11,14 +13,16 @@ public class HomeState : EndOfFrameNoPayloadState
   private readonly MetaContext _meta;
   private readonly ISystemFactory _systemFactory;
   private readonly ICurtainService _curtainService;
+  private readonly IAudioService _audioService;
 
   private HomeFeature _feature;
 
-  public HomeState(MetaContext meta, ISystemFactory systemFactory, ICurtainService curtainService)
+  public HomeState(MetaContext meta, ISystemFactory systemFactory, ICurtainService curtainService, IAudioService audioService)
   {
     _meta = meta;
     _systemFactory = systemFactory;
     _curtainService = curtainService;
+    _audioService = audioService;
   }
 
   protected override async void OnEnter()
@@ -26,8 +30,7 @@ public class HomeState : EndOfFrameNoPayloadState
     _feature = _systemFactory.Create<HomeFeature>();
     _feature.Initialize();
 
-    await GDTask.Delay(2000);
-      
+    _audioService.PlayMusic(MusicName.HomeTheme);
     await _curtainService.HideCurtain();
   }
 

@@ -1,7 +1,7 @@
 
 using Code.Infrastructure.States;
 using Code.Infrastructure.UI;
-using Code.Projects.Config;
+using Code.Projects.Settings;
 using Code.Projects.States;
 using Godot;
 
@@ -10,18 +10,18 @@ namespace Code.Credits.UI.About;
 public class AboutUiPresenter : IUiViewPresenter<AboutUiView>
 {
   private readonly IStateMachine _stateMachine;
-  private readonly IProjectConfig _projectConfig;
+  private readonly IProjectSettings _projectSettings;
 
-  public AboutUiPresenter(IStateMachine stateMachine, IProjectConfig projectConfig)
+  public AboutUiPresenter(IStateMachine stateMachine, IProjectSettings projectSettings)
   {
     _stateMachine = stateMachine;
-    _projectConfig = projectConfig;
+    _projectSettings = projectSettings;
   }
     
   public void OnAttach(AboutUiView view)
   {
-    view.Title.Text = _projectConfig.Name;
-    view.Version.Text = _projectConfig.Version;
+    view.Title.Text = _projectSettings.Name;
+    view.Version.Text = _projectSettings.Version;
     view.Back.Pressed += OnBackClick;
     view.Eula.Pressed += OnEulaClick;
     view.PrivacyPolicy.Pressed += OnPrivacyPolicyClick;

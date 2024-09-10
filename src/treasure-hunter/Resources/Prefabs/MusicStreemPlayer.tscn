@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpuhn3r3ulo4c"]
+
+[ext_resource type="Script" path="res://Code/Audio/Nodes/AudioPlayer.cs" id="1_oa4th"]
+
+[node name="MusicStreemPlayer" type="Node" node_paths=PackedStringArray("_audioStream")]
+script = ExtResource("1_oa4th")
+_audioStream = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

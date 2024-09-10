@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AudioConfig" load_steps=8 format=3 uid="uid://b1qa07qvkp7gh"]
+
+[ext_resource type="AudioStream" uid="uid://b0ybfcnhwai6" path="res://Resources/Audio/Music/main_menu_theme.mp3" id="1_4hxgn"]
+[ext_resource type="Script" path="res://Code/Audio/Configs/AudioConfig.cs" id="1_i7hyg"]
+[ext_resource type="Script" path="res://Code/Audio/Configs/MusicConfig.cs" id="2_vo22q"]
+[ext_resource type="AudioStream" uid="uid://b67mclo7nq1s2" path="res://Resources/Audio/Music/game_theme_forest.mp3" id="3_1uump"]
+[ext_resource type="PackedScene" uid="uid://d1lm3sw7arn6a" path="res://Resources/Prefabs/AudioPlayer.tscn" id="5_7twvw"]
+
+[sub_resource type="Resource" id="Resource_mwxjw"]
+script = ExtResource("2_vo22q")
+Name = 1
+Value = ExtResource("1_4hxgn")
+
+[sub_resource type="Resource" id="Resource_vbqhr"]
+script = ExtResource("2_vo22q")
+Name = 2
+Value = ExtResource("3_1uump")
+
+[resource]
+script = ExtResource("1_i7hyg")
+Effects = Array[Object]([])
+Musics = Array[Object]([SubResource("Resource_mwxjw"), SubResource("Resource_vbqhr")])
+SourcePrefab = ExtResource("5_7twvw")

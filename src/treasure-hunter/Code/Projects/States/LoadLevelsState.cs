@@ -21,6 +21,6 @@ public class LoadLevelsState : NoPayloadState
   {
     _sceneLoader.UnloadAllScenes();
     await _sceneLoader.LoadSceneAsync(LevelsScreenScenePath);
-    _stateMachine.Enter<HomeState>();
+    _stateMachine.Enter<LevelsState>();
   }
 }

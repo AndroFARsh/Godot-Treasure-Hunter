@@ -1,3 +1,5 @@
+using Code.Audio;
+using Code.Audio.Configs;
 using Code.Common.Curtains.Configs;
 using Code.Infrastructure.Windows;
 using Code.Infrastructure.Windows.Configs;
@@ -11,6 +13,8 @@ public interface IStaticDataService
     
   WindowServiceConfig WindowServiceConfig { get; }
     
+  AudioConfig AudioConfig { get; }
+  
   int NumberOfLevels { get; }
   
   void LoadAll();
@@ -18,4 +22,6 @@ public interface IStaticDataService
   WindowConfig GetWindowConfig(WindowName name);
 
   LevelConfig GetLevelConfig(int level);
+  MusicConfig GetMusicConfig(MusicName name);
+  EffectConfig GetEffectConfig(EffectName name);
 }

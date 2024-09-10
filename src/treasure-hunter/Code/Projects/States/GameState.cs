@@ -1,3 +1,5 @@
+using Code.Audio;
+using Code.Audio.Services;
 using Code.Common.Curtains;
 using Code.Infrastructure.States.Infrastructure;
 using Code.Infrastructure.Systems;
@@ -11,6 +13,7 @@ public class GameState : EndOfFrameNoPayloadState
   private readonly GameContext _game;
   private readonly ISystemFactory _systemFactory;
   private readonly ICurtainService _curtainService;
+  private readonly IAudioService _audioService;
 
   // private GameplayFeature _feature;
 
@@ -18,12 +21,14 @@ public class GameState : EndOfFrameNoPayloadState
     InputContext input,
     GameContext game,
     ISystemFactory systemFactory, 
-    ICurtainService curtainService)
+    ICurtainService curtainService,
+    IAudioService audioService)
   {
     _input = input;
     _game = game;
     _systemFactory = systemFactory;
     _curtainService = curtainService;
+    _audioService = audioService;
   }
 
   protected override void OnEnter()
@@ -31,6 +36,7 @@ public class GameState : EndOfFrameNoPayloadState
     // _feature = _systemFactory.Create<GameplayFeature>();
     // _feature.Initialize();
     //
+    _audioService.PlayMusic(MusicName.GameplayMainTheme);
     _curtainService.HideCurtain().Forget();
   }
 
