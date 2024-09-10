@@ -9,8 +9,10 @@ public partial class SettingsWindowView : TBaseWindow<SettingsWindowView>
   [Export] public Label Title { get; private set; }
   
   [ExportCategory("Content")]
+  [Export] public Slider General { get; private set; }
   [Export] public Slider Music { get; private set; }
   [Export] public Slider Effect { get; private set; }
+  
   [Export] public BaseButton Credits { get; private set; }
   
   [ExportCategory("Footer")]

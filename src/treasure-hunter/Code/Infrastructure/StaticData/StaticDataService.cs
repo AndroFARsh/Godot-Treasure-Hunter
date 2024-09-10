@@ -30,7 +30,7 @@ public class StaticDataService : IStaticDataService
     _resourcesProvider = resourcesProvider;
   }
 
-  public void LoadAll()
+  public void Initialize()
   {
     LoadCurtainConfig();
     LoadWindowServiceConfig();

@@ -17,7 +17,7 @@ public interface IStaticDataService
   
   int NumberOfLevels { get; }
   
-  void LoadAll();
+  void Initialize();
 
   WindowConfig GetWindowConfig(WindowName name);
 

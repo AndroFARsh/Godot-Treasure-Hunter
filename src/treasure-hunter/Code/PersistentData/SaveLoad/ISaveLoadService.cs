@@ -2,7 +2,7 @@ namespace Code.PersistentData.SaveLoad
 {
   public interface ISaveLoadService
   {
-    void InitializePersistentData();
+    void Initialize();
     
     void LoadPersistentData();
     

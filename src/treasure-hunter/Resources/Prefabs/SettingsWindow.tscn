@@ -3,15 +3,16 @@
 [ext_resource type="FontFile" uid="uid://cd6wy8ohnj356" path="res://Resources/Fonts/ThaleahFat_TTF.ttf" id="1_43jpj"]
 [ext_resource type="Script" path="res://Code/SettingsWindow/SettingsWindowView.cs" id="1_y5msw"]
 
-[node name="SettingsWindow" type="Control" node_paths=PackedStringArray("Title", "Music", "Effect", "Credits", "Back", "Save")]
-custom_minimum_size = Vector2(400, 200)
+[node name="SettingsWindow" type="Control" node_paths=PackedStringArray("Title", "General", "Music", "Effect", "Credits", "Back", "Save")]
+custom_minimum_size = Vector2(400, 265)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 400.0
-offset_bottom = 262.0
+offset_bottom = 260.0
 size_flags_horizontal = 0
 script = ExtResource("1_y5msw")
 Title = NodePath("MarginContainer/VBoxContainer/Label")
+General = NodePath("MarginContainer/VBoxContainer/GridContainer/GeneralValue")
 Music = NodePath("MarginContainer/VBoxContainer/GridContainer/MusicValue")
 Effect = NodePath("MarginContainer/VBoxContainer/GridContainer/EffectValue")
 Credits = NodePath("MarginContainer/VBoxContainer/GridContainer/CreditsButton")
@@ -58,6 +59,18 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 20
 columns = 2
 
+[node name="GeneralTitle" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_43jpj")
+text = "Audio
+"
+
+[node name="GeneralValue" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+
 [node name="MusicTitle" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_43jpj")
@@ -67,6 +80,8 @@ text = "Music
 [node name="MusicValue" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
 
 [node name="EffectTitle" type="Label" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -76,6 +91,8 @@ text = "Effect
 
 [node name="EffectValue" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
+max_value = 1.0
+step = 0.001
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2

@@ -8,10 +8,10 @@ public partial class AudioPlayer : Node, IAudioPlayer
   
   public bool IsPlaying => _audioStream.IsPlaying();
 
-  public float Volume
+  public AudioBus Bus
   {
-    get => _audioStream.VolumeDb;
-    set => _audioStream.VolumeDb = value;
+    get => _audioStream.GetBus().ToAudioBus(); 
+    set => _audioStream.SetBus(value.AsName());
   }
   
   public float Pitch
@@ -26,18 +26,10 @@ public partial class AudioPlayer : Node, IAudioPlayer
     set => _audioStream.SetStream(value);
   }
 
-  public bool Loop
-  {
-    get; 
-    set;
-  }
-
   public void Play()
   {
     if (!IsPlaying)
-    {
       _audioStream.Play();
-    }
   }
 
   public void Stop()

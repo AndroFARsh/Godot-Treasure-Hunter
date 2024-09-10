@@ -6,11 +6,11 @@ public interface IAudioPlayer
 {
   bool IsPlaying { get; }
   
-  float Volume { get; set; }
   float Pitch { get; set; }
   
   AudioStream Stream { get; set; }
-  bool Loop { get; set; }
+  
+  AudioBus Bus { get; set; } 
 
   void Play();
   

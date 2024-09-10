@@ -20,7 +20,7 @@ namespace Code.PersistentData.SaveLoad
       // PlayerPrefs.Save();
     }
 
-    public void InitializePersistentData() =>
+    public void Initialize() =>
       _persistentProvider.SetProgressData(new ProgressData());
     // _persistentProvider.SetProgressData(PlayerPrefs.HasKey(ProgressKey)
     //   ? PlayerPrefs.GetString(ProgressKey).FromJson<ProgressData>()

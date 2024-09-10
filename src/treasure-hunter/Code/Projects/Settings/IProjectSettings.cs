@@ -6,5 +6,6 @@ public interface IProjectSettings
   string Version { get; }
   float MusicVolume { get; set; }
   float EffectVolume { get; set; }
+  float GeneralVolume { get; set; }
   void Save();
 }
