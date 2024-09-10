@@ -1,3 +1,5 @@
+using Code.Audio.Factories;
+using Code.Audio.Services;
 using Code.Common.Curtains;
 using Code.Common.Extensions;
 using Code.Common.View.Factories;
@@ -9,8 +11,6 @@ using Code.Infrastructure.EntityFactories;
 using Code.Infrastructure.Identifiers;
 using Code.Infrastructure.Instantioator;
 using Code.Infrastructure.LifeTime;
-using Code.Infrastructure.PersistentData;
-using Code.Infrastructure.PersistentData.SaveLoad;
 using Code.Infrastructure.Physics;
 using Code.Infrastructure.Randoms;
 using Code.Infrastructure.ResourceManagement;
@@ -26,8 +26,10 @@ using Code.Levels.Services;
 using Code.Levels.UI.Factories;
 using Code.Levels.UI.LevelsButton;
 using Code.Levels.UI.LevelsMenu;
-using Code.Projects.Config;
+using Code.PersistentData;
+using Code.PersistentData.SaveLoad;
 using Code.Projects.EntryPoint;
+using Code.Projects.Settings;
 using Code.SettingsWindow;
 using Ninject.Modules;
 using Ninject.Syntax;
@@ -49,6 +51,7 @@ namespace Code.Projects.Modules
       BindUiFactories(this);
 
       BindGameplayServices(this);
+      
       // RegisterGameplayServices(builder);
       // RegisterGameplayFactories(builder);
     }
@@ -68,7 +71,7 @@ namespace Code.Projects.Modules
 
     private void BindCommonServices(IBindingRoot binder)
     {
-      binder.Bind<IProjectConfig>().To<ProjectConfig>().InSingletonScope();
+      binder.Bind<IProjectSettings>().To<ProjectSettings>().InSingletonScope();
       binder.Bind<ILifeTime>().To<LifeTime>().InSingletonScope();
       
       binder.BindInterfacesTo<ProjectEntryPoint>().InSingletonScope();
@@ -81,14 +84,13 @@ namespace Code.Projects.Modules
       binder.Bind<IIdProvider>().To<IdProvider>().InSingletonScope();
       binder.BindInterfacesTo<TimeService>().InSingletonScope();
       binder.Bind<ICurtainService>().To<CurtainService>().InSingletonScope();
-      // binder.Bind<ITimeService>().To<GodotTimeService>().InSingletonScope();
       
       binder.Bind<IRandomService>().To<SimpleRandomService>().InSingletonScope();
       
       binder.Bind<ISceneLoader>().To<SceneLoader>().InSingletonScope();
       binder.Bind<IResourcesProvider>().To<ResourcesProvider>().InSingletonScope();
       
-      // builder.Register<SoundService>(Lifetime.Singleton).As<ISoundService>();
+      binder.Bind<IAudioService>().To<AudioService>().InSingletonScope();
       
       binder.BindInterfacesTo<ColliderToEntityRegistryResolver>().InSingletonScope();
 
@@ -109,6 +111,9 @@ namespace Code.Projects.Modules
       binder.Bind<ISystemFactory>().To<SystemFactory>().InSingletonScope();
       
       binder.Bind<IWindowFactory>().To<WindowFactory>().InSingletonScope();
+      
+      binder.Bind<IAudioPlayerFactory>().To<AudioPlayerFactory>().InSingletonScope();
+      
     }
     
     private static void BindUiFactories(IBindingRoot binder)

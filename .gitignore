@@ -83,4 +83,5 @@ tools/CustomGenerators/CustomGenerators.Plugins/bin/*/*/*.json
 # Godot 4+ specific ignores
 .godot/
 /src/*/.godot/
+/src/*/override.cfg
 
