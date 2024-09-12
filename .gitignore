@@ -84,4 +84,5 @@ tools/CustomGenerators/CustomGenerators.Plugins/bin/*/*/*.json
 .godot/
 /src/*/.godot/
 /src/*/override.cfg
+/src/*-gen/
 

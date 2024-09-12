@@ -15,7 +15,7 @@ namespace Code.Common.View.Systems
     public CreateEntityViewFromPrefabSystem(IEntityFactory entityFactory, IEntityViewFactory entityViewFactory)
     {
       _entityViewFactory = entityViewFactory;
-      _entities = entityFactory.BuildGroup<TEntity>().With<ViewPrefabComponent>().With<ViewComponent>().Build();
+      _entities = entityFactory.BuildGroup<TEntity>().With<ViewPrefabComponent>().Non<ViewComponent>().Build();
     }
 
     public void Execute()

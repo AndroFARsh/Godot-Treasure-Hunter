@@ -1,6 +1,7 @@
 using Code.Audio;
 using Code.Audio.Services;
 using Code.Common.Curtains;
+using Code.Gameplay;
 using Code.Infrastructure.States.Infrastructure;
 using Code.Infrastructure.Systems;
 using GodotTask;
@@ -15,7 +16,7 @@ public class GameState : EndOfFrameNoPayloadState
   private readonly ICurtainService _curtainService;
   private readonly IAudioService _audioService;
 
-  // private GameplayFeature _feature;
+  private Feature _feature;
 
   public GameState(
     InputContext input,
@@ -33,30 +34,30 @@ public class GameState : EndOfFrameNoPayloadState
 
   protected override void OnEnter()
   {
-    // _feature = _systemFactory.Create<GameplayFeature>();
-    // _feature.Initialize();
-    //
+    _feature = _systemFactory.Create<GameplayFeature>();
+    _feature.Initialize();
+    
     _audioService.PlayMusic(MusicName.GameplayMainTheme);
     _curtainService.HideCurtain().Forget();
   }
 
   protected override void OnTick()
   {
-    // _feature.Execute();
-    // _feature.Cleanup();
+    _feature.Execute();
+    _feature.Cleanup();
   }
 
   protected override async GDTask OnExitAsync()
   {
     await _curtainService.ShowCurtain();
       
-    // _feature.DeactivateReactiveSystems();
-    // _feature.ClearReactiveSystems();
+    _feature.DeactivateReactiveSystems();
+    _feature.ClearReactiveSystems();
 
     MarkAllEntitiesReadyToDestroy();
       
-    // _feature.TearDown();
-    // _feature = null;
+    _feature.TearDown();
+    _feature = null;
   }
 
   private void MarkAllEntitiesReadyToDestroy()

@@ -23,14 +23,14 @@ public partial class Project : Node, IProject
     _kernel.Get<ILifeTime>().Start();
   }
 
+  public override void _ExitTree()
+  {
+    _kernel.Get<ILifeTime>().Stop();
+    _kernel.Dispose();
+    _kernel = null;
+  } 
+
   public override void _Process(double delta) =>_kernel.Get<ILifeTime>().Tick(delta);
 
   public void Quit() => GetTree().Quit();
-  
-  protected override void Dispose(bool disposing)
-  {
-    base.Dispose(disposing);
-    _kernel.Get<ILifeTime>().Stop();
-    _kernel.Dispose(disposing);
-  }
 }

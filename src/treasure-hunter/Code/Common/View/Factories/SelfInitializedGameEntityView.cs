@@ -1,6 +1,5 @@
-namespace Code.Common.View.Factories
+namespace Code.Common.View.Factories;
+
+public partial class SelfInitializedGameEntityView : SelfInitializedEntityView<GameEntity>
 {
-  public partial class SelfInitializedGameEntityView : SelfInitializedEntityView<GameEntity>
-  {
-  }
 }
