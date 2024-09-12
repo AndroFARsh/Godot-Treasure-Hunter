@@ -15,7 +15,7 @@ namespace Code.Common.View.Systems
     public CreateEntityViewFromPathSystem(IEntityFactory entityFactory, IEntityViewFactory entityViewFactory)
     {
       _entityViewFactory = entityViewFactory;
-      _entities = entityFactory.BuildGroup<TEntity>().With<ViewPathComponent>().With<ViewComponent>().Build();
+      _entities = entityFactory.BuildGroup<TEntity>().With<ViewPathComponent>().Non<ViewComponent>().Build();
     }
 
     public void Execute()

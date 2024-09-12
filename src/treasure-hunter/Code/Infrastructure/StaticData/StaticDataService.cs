@@ -4,6 +4,7 @@ using Code.Audio;
 using Code.Audio.Configs;
 using Code.Common.Curtains.Configs;
 using Code.Common.Extensions;
+using Code.Gameplay.Character.Configs;
 using Code.Infrastructure.ResourceManagement;
 using Code.Infrastructure.Windows;
 using Code.Infrastructure.Windows.Configs;
@@ -19,6 +20,7 @@ public class StaticDataService : IStaticDataService
   private readonly Dictionary<MusicName, MusicConfig> _musics = new();
   private readonly List<LevelConfig> _levels = new();
 
+  public CharacterConfig CharacterConfig { get; private set; }
   public AudioConfig AudioConfig { get; private set; }
   public CurtainConfig CurtainConfig { get; private set; }
   public WindowServiceConfig WindowServiceConfig { get; private set; }
@@ -36,6 +38,7 @@ public class StaticDataService : IStaticDataService
     LoadWindowServiceConfig();
     LoadLevelConfig();
     LoadAudioConfig();
+    LoadCharacterConfig();
   }
 
   private void LoadAudioConfig() =>
@@ -57,4 +60,7 @@ public class StaticDataService : IStaticDataService
   private void LoadWindowServiceConfig() =>
     WindowServiceConfig = _resourcesProvider.Load<WindowServiceConfig>("res://Configs/Windows/WindowServiceConfig.tres")
       .With(cfg => _windows.AddRange(cfg.Windows.ToDictionary(c => c.Name)));
+  
+  private void LoadCharacterConfig() =>
+    CharacterConfig = _resourcesProvider.Load<CharacterConfig>("res://Configs/Characters/CaptainClownCharacterConfig.tres");
 }

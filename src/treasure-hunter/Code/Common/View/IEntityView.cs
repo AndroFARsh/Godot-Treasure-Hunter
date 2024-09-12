@@ -1,12 +1,13 @@
 using Entitas;
+using Godot;
 
 namespace Code.Common.View
 {
   public interface IEntityView
   {
-    string PoolKey { get; set; }
+    string PoolKey { get; }
     
-    //GameObject GameObject { get; }
+    Node Node { get; }
     
     void Retain(IEntity entity);
     void Release();

@@ -4,6 +4,7 @@ using Code.Common.Curtains;
 using Code.Common.Extensions;
 using Code.Common.View.Factories;
 using Code.Credits.UI.About;
+using Code.Gameplay.Character.Factories;
 using Code.Gameplay.HUD;
 using Code.Gameplay.Windows.MenuWindow;
 using Code.Home.UI.MainMenu;
@@ -29,6 +30,7 @@ using Code.Levels.UI.LevelsMenu;
 using Code.PersistentData;
 using Code.PersistentData.SaveLoad;
 using Code.Projects.EntryPoint;
+using Code.Projects.Providers;
 using Code.Projects.Settings;
 using Code.SettingsWindow;
 using Ninject.Modules;
@@ -51,9 +53,7 @@ namespace Code.Projects.Modules
       BindUiFactories(this);
 
       BindGameplayServices(this);
-      
-      // RegisterGameplayServices(builder);
-      // RegisterGameplayFactories(builder);
+      BindGameplayFactories(this);
     }
     
     private static void BindContexts(IBindingRoot binder)
@@ -71,6 +71,8 @@ namespace Code.Projects.Modules
 
     private void BindCommonServices(IBindingRoot binder)
     {
+      binder.BindInterfacesAndSelfTo<GameRootProvider>().InSingletonScope();
+      
       binder.Bind<IProjectSettings>().To<ProjectSettings>().InSingletonScope();
       binder.Bind<ILifeTime>().To<LifeTime>().InSingletonScope();
       
@@ -146,11 +148,11 @@ namespace Code.Projects.Modules
       binder.Bind<ILevelDataProvider>().To<LevelDataProvider>().InSingletonScope();
       // builder.Register<SimpleInputService>(Lifetime.Singleton).As<IInputService>();
     }
-    //
-    // private static void RegisterGameplayFactories(IContainerBuilder builder)
-    // {
-    //   builder.Register<ProtagonistFactory>(Lifetime.Singleton).As<IProtagonistFactory>();
-    // }
+    
+    private static void BindGameplayFactories(IBindingRoot binder)
+    {
+      binder.Bind<ICharacterFactory>().To<CharacterFactory>().InSingletonScope();
+    }
     
   }
 }

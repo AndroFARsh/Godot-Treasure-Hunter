@@ -1,12 +1,10 @@
 using Entitas;
-using TreasureHunter.Code.Common.View;
 
-namespace Code.Common.View.Factories
+namespace Code.Common.View.Factories;
+
+public interface IEntityViewFactory
 {
-  public interface IEntityViewFactory
-  {
-    IEntityView CreateViewForEntityFromPath(IEntity entity);
-    IEntityView CreateViewForEntityFromPrefab(IEntity entity);
-    void Release(IEntityView view);
-  }
+  IEntityView CreateViewForEntityFromPath(IEntity entity);
+  IEntityView CreateViewForEntityFromPrefab(IEntity entity);
+  void Release(IEntityView view);
 }

@@ -1,5 +1,6 @@
 using System;
 using Code.Infrastructure.LifeTime;
+using Godot;
 
 namespace Code.Infrastructure.Time
 {
@@ -17,6 +18,7 @@ namespace Code.Infrastructure.Time
     
     public void Resume() => _paused = false;
 
-    public void Tick(double deltaTime) => _deltaTime = (float)deltaTime;
+    public void Tick(double deltaTime) =>
+      _deltaTime = (float)deltaTime;
   }
 }

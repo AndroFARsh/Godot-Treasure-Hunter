@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CharacterConfig" load_steps=3 format=3 uid="uid://clmet1a4x46h3"]
+
+[ext_resource type="PackedScene" uid="uid://b6h8mmptwl2fj" path="res://Resources/MainCharacter/Character.tscn" id="1_dyjhv"]
+[ext_resource type="Script" path="res://Code/Gameplay/Character/Configs/CharacterConfig.cs" id="1_fnvxp"]
+
+[resource]
+script = ExtResource("1_fnvxp")
+Prefab = ExtResource("1_dyjhv")
+RunSpeed = 130.0
+JumpVelocity = -300.0
