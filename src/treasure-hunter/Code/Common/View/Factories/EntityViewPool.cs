@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace Code.Common.View.Factories;
 
-public class EntityViewPool : IEntityViewPool
+public class EntityViewPool : IEntityViewPool, IDisposable
 {
   private readonly Dictionary<string, LinkedList<IEntityView>> _pools = new(4);
 
@@ -11,8 +12,7 @@ public class EntityViewPool : IEntityViewPool
     result = null;
     if (_pools.TryGetValue(resource, out LinkedList<IEntityView> pool) && pool.Count > 0)
     {
-      result = pool.First.Value;
-      // result.GameObject.SetActive(true);
+      if (pool.First != null) result = pool.First.Value;
       pool.RemoveFirst();
     }
 
@@ -37,10 +37,11 @@ public class EntityViewPool : IEntityViewPool
     foreach (LinkedList<IEntityView> pool in _pools.Values)
     {
       foreach (IEntityView entityView in pool)
-      {
-        // Object.Destroy(entityView.GameObject);
-      }
+        entityView.Node.QueueFree();
+      
       pool.Clear();
     }
   }
+
+  public void Dispose() => CleanUp();
 }

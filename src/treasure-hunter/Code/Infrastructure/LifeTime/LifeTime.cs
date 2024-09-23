@@ -38,5 +38,9 @@ public class LifeTime : ILifeTime
     started = false;
     foreach (IStopable stopable in _stopables)
       stopable?.Stop();
+    
+    _tickables = null;
+    _startables = null;
+    _stopables = null;
   }
 }

@@ -40,8 +40,11 @@ namespace Code.Levels.UI.LevelsMenu
     public void OnDetach(LevelsMenuUiView view)
     {
       foreach (LevelButtonUiView button in _buttons)
+      {
         view.Content.RemoveChild(button);
-      
+        button.QueueFree();
+      }
+
       _buttons.Clear();
     } 
     

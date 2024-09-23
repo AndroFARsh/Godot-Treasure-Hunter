@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CameraConfig" load_steps=3 format=3 uid="uid://dl4jnp205seta"]
+
+[ext_resource type="PackedScene" uid="uid://dhrolu1uh1tuy" path="res://Resources/Camers/Camera.tscn" id="1_f2a7w"]
+[ext_resource type="Script" path="res://Code/Gameplay/Cameras/Configs/CameraConfig.cs" id="1_hhqgd"]
+
+[resource]
+script = ExtResource("1_hhqgd")
+Prefab = ExtResource("1_f2a7w")

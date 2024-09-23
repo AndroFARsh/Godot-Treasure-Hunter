@@ -5,14 +5,14 @@ using Godot;
 
 namespace Code.Gameplay.Character.Systems;
 
-public class MoveCharacterSystem : IExecuteSystem
+public class SimpleMoveCharacterSystem : IExecuteSystem
 {
   private readonly ITimeService _timeService;
   private readonly IStaticDataService _staticDataService;
   private readonly IGroup<GameEntity> _entities;
   private readonly GameContext _game;
 
-  public MoveCharacterSystem(GameContext game, ITimeService timeService, IStaticDataService staticDataService)
+  public SimpleMoveCharacterSystem(GameContext game, ITimeService timeService, IStaticDataService staticDataService)
   {
     _game = game;
     _timeService = timeService;
@@ -40,16 +40,16 @@ public class MoveCharacterSystem : IExecuteSystem
     // Handle Jump.
     if (Input.IsActionJustPressed("Jump") && body.IsOnFloor())
     {
-      velocity.Y = _staticDataService.CharacterConfig.JumpVelocity;
+      velocity.Y = _staticDataService.CharacterConfig.JumpForce;
     }
 
     // Get the input direction and handle the movement/deceleration.
     // As good practice, you should replace UI actions with custom gameplay actions.
     float direction = Input.GetAxis("MoveLeft", "MoveRight");
     if (direction != 0)
-      velocity.X = direction * _staticDataService.CharacterConfig.RunSpeed;
+      velocity.X = direction * _staticDataService.CharacterConfig.GroundRunSpeed;
     else
-      velocity.X = Mathf.MoveToward(body.Velocity.X, 0, _staticDataService.CharacterConfig.RunSpeed);
+      velocity.X = Mathf.MoveToward(body.Velocity.X, 0, _staticDataService.CharacterConfig.GroundRunSpeed);
 
     body.Velocity = velocity;
     body.MoveAndSlide();

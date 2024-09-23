@@ -15,4 +15,6 @@ public interface IAudioPlayer
   void Play();
   
   void Stop();
+
+  void Destroy();
 }

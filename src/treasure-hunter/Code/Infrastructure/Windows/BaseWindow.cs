@@ -4,6 +4,8 @@ namespace Code.Infrastructure.Windows;
 
 public abstract partial class BaseWindow: Control, IWindow
 {
+  public Node Node => this;
+  
   
   // This method would be called right after window created 
   public virtual void OnCreate()

@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using Code.Infrastructure.LifeTime;
+using Code.Projects.Modules;
 using Godot;
 using Ninject;
 
@@ -22,13 +23,18 @@ public partial class Project : Node, IProject
     
     _kernel.Get<ILifeTime>().Start();
   }
-
-  public override void _ExitTree()
+  
+  public override void _Notification(int what)
   {
-    _kernel.Get<ILifeTime>().Stop();
-    _kernel.Dispose();
-    _kernel = null;
-  } 
+    if (what == NotificationPredelete)
+    {
+      Contexts.sharedInstance.Reset();
+      
+      _kernel.Get<ILifeTime>().Stop();
+      _kernel.Dispose();
+      _kernel = null;
+    }
+  }
 
   public override void _Process(double delta) =>_kernel.Get<ILifeTime>().Tick(delta);
 

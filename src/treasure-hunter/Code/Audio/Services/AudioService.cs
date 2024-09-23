@@ -9,7 +9,7 @@ using GodotTask;
 
 namespace Code.Audio.Services;
 
-public class AudioService : IAudioService
+public class AudioService : IAudioService, IDisposable
 {
   private readonly IAudioPlayerFactory _audioFactory;
   private readonly IStaticDataService _staticDataService;
@@ -73,5 +73,11 @@ public class AudioService : IAudioService
       
     await GDTask.WaitUntil(() => !player.IsPlaying);
     _audioFactory.Release(player);
+  }
+
+  public void Dispose()
+  {
+    _player?.Destroy();
+    _player = null;
   }
 }

@@ -1,6 +1,5 @@
 using Code.Infrastructure.UI;
 using Godot;
-using Ninject;
 
 namespace Code.Home.UI.MainMenu;
 

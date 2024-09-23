@@ -37,4 +37,10 @@ public partial class AudioPlayer : Node, IAudioPlayer
     if (IsPlaying)
       _audioStream.Stop();
   }
+
+  public void Destroy()
+  {
+    Stop();
+    QueueFree();
+  }
 }

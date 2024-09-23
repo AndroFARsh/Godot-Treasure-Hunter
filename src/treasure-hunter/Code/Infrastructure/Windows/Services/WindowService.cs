@@ -32,14 +32,14 @@ public class WindowService : IWindowService
     {
       IWindow prevWindow = GetOrCreateWindow(prevName);
       prevWindow.Pause();
-      _windowRoot.Content.RemoveChild((Node)prevWindow);
+      _windowRoot.Content.RemoveChild(prevWindow.Node);
     }
 
     if ((flag & IWindowService.REPLACE_TOP_FLAG) > 0) _stack.TryPop(out WindowName _);
     if ((flag & IWindowService.CLEAR_STACK_FLAG) > 0) _stack.Clear();
 
     IWindow window = GetOrCreateWindow(name);
-    _windowRoot.Content.AddChild((Node)window);
+    _windowRoot.Content.AddChild(window.Node);
     
     window.Resume();
       
@@ -54,13 +54,13 @@ public class WindowService : IWindowService
     {
       IWindow window = GetOrCreateWindow(name);
       window.Pause();
-      _windowRoot.Content.RemoveChild((Node)window);
+      _windowRoot.Content.RemoveChild(window.Node);
     }
       
     if (_stack.TryPeek(out WindowName prevName))
     {
       IWindow prevWindow = GetOrCreateWindow(prevName);
-      _windowRoot.Content.AddChild((Node)prevWindow);
+      _windowRoot.Content.AddChild(prevWindow.Node);
       prevWindow.Resume();
     }
 
@@ -69,6 +69,9 @@ public class WindowService : IWindowService
     
   public void Release()
   {
+    foreach (IWindow window in _windows.Values)
+      window.Node.QueueFree();
+    
     _windows.Clear();
     _windowRoot = null;
   }
