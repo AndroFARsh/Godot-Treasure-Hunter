@@ -4,7 +4,7 @@ using Ninject;
 
 namespace Code.Levels.UI.LevelsButton;
 
-public partial class LevelButtonUiView : BaseUiView<LevelButtonUiView>
+public partial class LevelButtonUiView : BaseUiView
 {
   private int _level;
     

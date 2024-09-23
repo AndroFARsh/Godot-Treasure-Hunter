@@ -8,7 +8,7 @@ using Code.Projects.States;
 
 namespace Code.Levels.UI.LevelsMenu
 {
-  public class LevelsMenuUiPresenter : IUiViewPresenter<LevelsMenuUiView>
+  public class LevelsMenuUiPresenter : IUiViewPresenter
   {
     private readonly IStaticDataService _staticDataService;
     private readonly ILevelButtonFactory _factory;
@@ -25,9 +25,13 @@ namespace Code.Levels.UI.LevelsMenu
       _factory = factory;
       _stateMachine = stateMachine;
     }
-    
-    public void OnAttach(LevelsMenuUiView view)
+
+    public bool IsSupported(IUiView view) => view is LevelsMenuUiView;
+
+    public void OnAttach(IUiView v)
     {
+      if (v is not LevelsMenuUiView view) return;
+      
       view.Back.Pressed += OnBackClick;
       for (int level = 0; level < _staticDataService.NumberOfLevels; level++)
       {
@@ -37,8 +41,10 @@ namespace Code.Levels.UI.LevelsMenu
       }
     }
 
-    public void OnDetach(LevelsMenuUiView view)
+    public void OnDetach(IUiView v)
     {
+      if (v is not LevelsMenuUiView view) return;
+      
       foreach (LevelButtonUiView button in _buttons)
       {
         view.Content.RemoveChild(button);

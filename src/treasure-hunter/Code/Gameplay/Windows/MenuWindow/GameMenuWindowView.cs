@@ -3,7 +3,7 @@ using Godot;
 
 namespace Code.Gameplay.Windows.MenuWindow;
 
-public partial class GameMenuWindowView : TBaseWindow<GameMenuWindowView>
+public partial class GameMenuWindowView : BaseWindow
 {
   [ExportCategory("Title")]
   [Export] public Label Title { get; private set; }

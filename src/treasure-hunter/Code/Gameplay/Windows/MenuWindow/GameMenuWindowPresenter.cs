@@ -7,7 +7,7 @@ using Code.Projects.States;
 
 namespace Code.Gameplay.Windows.MenuWindow
 {
-  public class GameMenuWindowPresenter : IUiViewPresenter<GameMenuWindowView>
+  public class GameMenuWindowPresenter : IUiViewPresenter
   {
     private readonly IWindowService _windowService;
     private readonly IStateMachine _stateMachine;
@@ -19,9 +19,12 @@ namespace Code.Gameplay.Windows.MenuWindow
       _stateMachine = stateMachine;
       _timeService = timeService;
     }
+
+    public bool IsSupported(IUiView view) => view is GameMenuWindowView;
     
-    public void OnAttach(GameMenuWindowView view)
+    public void OnAttach(IUiView v)
     {
+      if (v is not GameMenuWindowView view) return;
       view.Resume.Pressed += OnResumeClick;
       view.Settings.Pressed += OnSettingsClick;
       view.MainMenu.Pressed += OnMainMenuClick;
@@ -29,8 +32,9 @@ namespace Code.Gameplay.Windows.MenuWindow
       _timeService.Pause();
     }
     
-    public void OnDetach(GameMenuWindowView view)
+    public void OnDetach(IUiView v)
     {
+      if (v is not GameMenuWindowView view) return;
       _timeService.Resume();
       
       view.Resume.Pressed -= OnResumeClick;

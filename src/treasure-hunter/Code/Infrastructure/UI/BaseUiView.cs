@@ -3,27 +3,26 @@ using Ninject;
 
 namespace Code.Infrastructure.UI;
 
-public abstract partial class BaseUiView<TUiView> : Control, IUiView
-  where TUiView : class, IUiView
+public abstract partial class BaseUiView : Control, IUiView
 {
-  private IUiViewPresenter<TUiView> _viewPresenter;
+  private IUiViewPresenter _presenter;
 
   [Inject]
-  public void Construct(IUiViewPresenter<TUiView> viewPresenter)
+  public void Construct(IPresenterProvider presenterProvider)
   {
-    _viewPresenter = viewPresenter;
+    presenterProvider.TryGetPresenter(this, out _presenter);
   }
   
   public override void _EnterTree()
   {
-    _viewPresenter.OnAttach(this as TUiView);
+    _presenter?.OnAttach(this);
     OnCreate();
   }
 
   public override void _ExitTree()
   {
     OnDestroy();
-    _viewPresenter.OnDetach(this as TUiView);
+    _presenter?.OnDetach(this);
   }
 
   protected virtual void OnCreate()
