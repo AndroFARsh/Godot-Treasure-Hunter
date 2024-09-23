@@ -1,13 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Code.Infrastructure.Instantioator;
-using Code.Infrastructure.ResourceManagement;
 using Code.Projects;
 using Godot;
 using GodotTask;
 
 namespace Code.Infrastructure.SceneManagement
 {
-  public class SceneLoader : ISceneLoader
+  public class SceneLoader : ISceneLoader, IDisposable
   {
     private readonly IProject _root;
     private readonly Instantiator _instantiator;
@@ -38,17 +38,33 @@ namespace Code.Infrastructure.SceneManagement
     public void UnloadAllScenes()
     {
       foreach (Node child in _scenes.Values)
+      {
         _root.SceneRoot.RemoveChild(child);
-      
+        child.QueueFree();
+      }
+
       _scenes.Clear();
     }
 
     public void UnloadScene(string path)
     {
       if (_scenes.Remove(path, out Node scene) && scene != null)
+      {
         _root.SceneRoot.RemoveChild(scene);
+        scene.QueueFree();
+      }
     }
 
     private Node LoadAndInstantiateScene(string path) => _instantiator.Instantiate(path);
+    
+    public void Dispose()
+    {
+      foreach (Node scene in _scenes.Values)
+      {
+        _root.SceneRoot.RemoveChild(scene);
+        scene.QueueFree();
+      }
+      _scenes.Clear();
+    }
   }
 }

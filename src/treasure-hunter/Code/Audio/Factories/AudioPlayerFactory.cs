@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Audio.Nodes;
 using Code.Common.Extensions;
@@ -8,7 +9,7 @@ using Godot;
 
 namespace Code.Audio.Factories;
 
-public class AudioPlayerFactory : IAudioPlayerFactory
+public class AudioPlayerFactory : IAudioPlayerFactory, IDisposable
 {
   private readonly IProject _project;
   private readonly IInstantiator _instantiator;
@@ -44,5 +45,12 @@ public class AudioPlayerFactory : IAudioPlayerFactory
   {
     source.Stop();
     _audioPlayers.AddLast(source);
+  }
+
+  public void Dispose()
+  {
+    foreach (IAudioPlayer player in _audioPlayers) player.Destroy();
+    
+    _audioPlayers.Clear();
   }
 }

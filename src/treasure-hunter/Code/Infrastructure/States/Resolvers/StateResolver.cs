@@ -5,7 +5,7 @@ using Code.Infrastructure.States.Infrastructure;
 
 namespace Code.Infrastructure.States.Resolvers
 {
-  class StateResolver : IStateResolver
+  class StateResolver : IStateResolver, IDisposable
   {
     private readonly IInstantiator _instantiator;
     private readonly Dictionary<Type, IState> _states = new();
@@ -26,5 +26,7 @@ namespace Code.Infrastructure.States.Resolvers
 
       return state as TState;
     }
+
+    public void Dispose() => _states.Clear();
   }
 }

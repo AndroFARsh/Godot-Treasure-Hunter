@@ -4,6 +4,7 @@ using Code.Common.Curtains;
 using Code.Common.Extensions;
 using Code.Common.View.Factories;
 using Code.Credits.UI.About;
+using Code.Gameplay.Cameras.Factories;
 using Code.Gameplay.Character.Factories;
 using Code.Gameplay.HUD;
 using Code.Gameplay.Windows.MenuWindow;
@@ -152,7 +153,7 @@ namespace Code.Projects.Modules
     private static void BindGameplayFactories(IBindingRoot binder)
     {
       binder.Bind<ICharacterFactory>().To<CharacterFactory>().InSingletonScope();
+      binder.Bind<ICameraFactory>().To<CameraFactory>().InSingletonScope();
     }
-    
   }
 }

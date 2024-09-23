@@ -6,5 +6,10 @@
 [resource]
 script = ExtResource("1_fnvxp")
 Prefab = ExtResource("1_dyjhv")
-RunSpeed = 130.0
-JumpVelocity = -300.0
+GroundAcceleration = 300.0
+GroundRunSpeed = 200.0
+GroundDeceleration = 500.0
+CoyoteTime = 1.0
+BufferTime = 1.0
+JumpForce = -500.0
+MaxFallSpeed = 400.0

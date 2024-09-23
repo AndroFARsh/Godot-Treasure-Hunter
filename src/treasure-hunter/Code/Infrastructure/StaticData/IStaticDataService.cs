@@ -1,6 +1,7 @@
 using Code.Audio;
 using Code.Audio.Configs;
 using Code.Common.Curtains.Configs;
+using Code.Gameplay.Cameras.Configs;
 using Code.Gameplay.Character.Configs;
 using Code.Infrastructure.Windows;
 using Code.Infrastructure.Windows.Configs;
@@ -14,7 +15,9 @@ public interface IStaticDataService
     
   WindowServiceConfig WindowServiceConfig { get; }
 
-  CharacterConfig CharacterConfig { get;  }
+  CameraConfig CameraConfig { get; }
+
+  CharacterConfig CharacterConfig { get; }
 
   AudioConfig AudioConfig { get; }
   
