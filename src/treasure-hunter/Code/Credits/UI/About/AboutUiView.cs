@@ -3,7 +3,7 @@ using Godot;
 
 namespace Code.Credits.UI.About;
 
-public partial class AboutUiView : BaseUiView<AboutUiView>
+public partial class AboutUiView : BaseUiView
 {
   [Export] public Label Title { get; private set; }
   [Export] public Label Version { get; private set; }

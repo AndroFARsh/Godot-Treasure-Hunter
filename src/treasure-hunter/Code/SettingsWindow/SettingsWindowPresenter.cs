@@ -9,7 +9,7 @@ using Godot;
 
 namespace Code.SettingsWindow
 {
-  public class SettingsWindowPresenter : IUiViewPresenter<SettingsWindowView>
+  public class SettingsWindowPresenter : IUiViewPresenter
   {
     private readonly IWindowService _windowService;
     private readonly IStateMachine _stateMachine;
@@ -29,11 +29,14 @@ namespace Code.SettingsWindow
       _settings = settings;
       _audioService = audioService;
     }
+
+    public bool IsSupported(IUiView v) => v is SettingsWindowView;
     
-    public void OnAttach(SettingsWindowView view)
+    public void OnAttach(IUiView v)
     {
+      if (v is not SettingsWindowView view) return;
+
       _view = view;
-      
       _view.General.ValueChanged += OnGeneralValueChanged;
       _view.General.Value = _settings.GeneralVolume;
 
@@ -48,17 +51,18 @@ namespace Code.SettingsWindow
       _view.Back.Pressed += OnBackClick;
     }
 
-    public void OnDetach(SettingsWindowView view)
+    public void OnDetach(IUiView v)
     {
-      _view.General.ValueChanged -= OnGeneralValueChanged;
-      _view.Music.ValueChanged -= OnMusicValueChanged;
-      _view.Effect.ValueChanged -= OnEffectValueChanged; 
-      
-      _view.Credits.Pressed -= OnCreditsClick;
-      _view.Save.Pressed -= OnSaveClick;
-      _view.Back.Pressed -= OnBackClick;
-      
       _view = null;
+      if (v is not SettingsWindowView view) return;
+      
+      view.General.ValueChanged -= OnGeneralValueChanged;
+      view.Music.ValueChanged -= OnMusicValueChanged;
+      view.Effect.ValueChanged -= OnEffectValueChanged; 
+      
+      view.Credits.Pressed -= OnCreditsClick;
+      view.Save.Pressed -= OnSaveClick;
+      view.Back.Pressed -= OnBackClick;
     }
 
     private void OnCreditsClick()

@@ -4,7 +4,7 @@ using Code.Infrastructure.Windows.Services;
 
 namespace Code.Gameplay.HUD;
 
-public class GameHUDPresenter : IUiViewPresenter<GameHUDView>
+public class GameHUDPresenter : IUiViewPresenter
 {
   private readonly IWindowService _windowService;
   
@@ -12,14 +12,18 @@ public class GameHUDPresenter : IUiViewPresenter<GameHUDView>
   {
     _windowService = windowService;
   }
-    
-  public void OnAttach(GameHUDView view)
+
+  public bool IsSupported(IUiView view) => view is GameHUDView;
+
+  public void OnAttach(IUiView v)
   {
+    if (v is not GameHUDView view) return;
     view.Menu.Pressed += OnMenuClick;
   }
   
-  public void OnDetach(GameHUDView view)
+  public void OnDetach(IUiView v)
   {
+    if (v is not GameHUDView view) return;
     view.Menu.Pressed -= OnMenuClick;
   }
   

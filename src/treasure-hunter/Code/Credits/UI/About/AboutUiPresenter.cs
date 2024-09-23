@@ -7,7 +7,7 @@ using Godot;
 
 namespace Code.Credits.UI.About;
 
-public class AboutUiPresenter : IUiViewPresenter<AboutUiView>
+public class AboutUiPresenter : IUiViewPresenter
 {
   private readonly IStateMachine _stateMachine;
   private readonly IProjectSettings _projectSettings;
@@ -17,9 +17,12 @@ public class AboutUiPresenter : IUiViewPresenter<AboutUiView>
     _stateMachine = stateMachine;
     _projectSettings = projectSettings;
   }
-    
-  public void OnAttach(AboutUiView view)
+
+  public bool IsSupported(IUiView view) => view is AboutUiView;
+  
+  public void OnAttach(IUiView v)
   {
+    AboutUiView view = v as AboutUiView;
     view.Title.Text = _projectSettings.Name;
     view.Version.Text = _projectSettings.Version;
     view.Back.Pressed += OnBackClick;
@@ -27,8 +30,9 @@ public class AboutUiPresenter : IUiViewPresenter<AboutUiView>
     view.PrivacyPolicy.Pressed += OnPrivacyPolicyClick;
   }
   
-  public void OnDetach(AboutUiView view)
+  public void OnDetach(IUiView v)
   {
+    AboutUiView view = v as AboutUiView;
     view.Back.Pressed -= OnBackClick;
     view.Eula.Pressed -= OnEulaClick;
     view.PrivacyPolicy.Pressed -= OnEulaClick;

@@ -1,9 +1,11 @@
 namespace Code.Infrastructure.UI
 {
-  public interface IUiViewPresenter<TUiView> where TUiView : IUiView
+  public interface IUiViewPresenter
   {
-    void OnAttach(TUiView view);
+    bool IsSupported(IUiView view);
     
-    void OnDetach(TUiView view);
+    void OnAttach(IUiView view);
+    
+    void OnDetach(IUiView view);
   }
 }

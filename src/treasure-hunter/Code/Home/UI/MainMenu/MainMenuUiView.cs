@@ -3,7 +3,7 @@ using Godot;
 
 namespace Code.Home.UI.MainMenu;
 
-public partial class MainMenuUiView : BaseUiView<MainMenuUiView>
+public partial class MainMenuUiView : BaseUiView
 {
   [ExportGroup("Title")]
   [Export] public Label Title { get; private set; }

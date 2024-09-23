@@ -3,7 +3,7 @@ using Godot;
 
 namespace Code.SettingsWindow;
 
-public partial class SettingsWindowView : TBaseWindow<SettingsWindowView>
+public partial class SettingsWindowView : BaseWindow
 {
   [ExportCategory("Title")]
   [Export] public Label Title { get; private set; }

@@ -22,6 +22,8 @@ using Code.Infrastructure.States.Resolvers;
 using Code.Infrastructure.StaticData;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.Time;
+using Code.Infrastructure.UI;
+using Code.Infrastructure.Windows;
 using Code.Infrastructure.Windows.Factories;
 using Code.Infrastructure.Windows.Services;
 using Code.Levels.Services;
@@ -126,6 +128,8 @@ namespace Code.Projects.Modules
     
     private static void BindUiViewPresenters(IBindingRoot binder)
     {
+      binder.Bind<IPresenterProvider>().To<PresenterProvider>().InSingletonScope();
+      
       binder.BindInterfacesTo<MainMenuUiPresenter>().InSingletonScope();
       
       binder.BindInterfacesTo<LevelsMenuUiPresenter>().InSingletonScope();
