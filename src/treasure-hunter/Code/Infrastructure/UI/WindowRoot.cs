@@ -1,7 +1,7 @@
-using Code.Infrastructure.StaticData;
 using Code.Infrastructure.Time;
-using Code.Infrastructure.Windows.Configs;
-using Code.Infrastructure.Windows.Services;
+using Code.Infrastructure.UI.Windows.Configs;
+using Code.Infrastructure.UI.Windows.Services;
+using Code.StaticData;
 using Godot;
 using GodotTask;
 using Ninject;
@@ -42,7 +42,7 @@ namespace Code.Infrastructure.UI
       _shown = true;
       
       Visible = true;
-      WindowServiceConfig config = _staticDataService.WindowServiceConfig;
+      WindowConfig config = _staticDataService.WindowConfig;
       
       Background.Color = Background.Color with { A = 0f };
       
@@ -65,7 +65,7 @@ namespace Code.Infrastructure.UI
       _inProgress = true;
 
       Visible = true;
-      WindowServiceConfig config = _staticDataService.WindowServiceConfig;
+      WindowConfig config = _staticDataService.WindowConfig;
       
       Background.Color = Background.Color with { A = config.MaxAlpha };
 

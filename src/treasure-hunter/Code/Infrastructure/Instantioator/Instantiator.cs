@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Code.Common.Extensions;
 using Code.Infrastructure.ResourceManagement;
 using Godot;
 using Ninject;
@@ -34,9 +35,8 @@ public class Instantiator : IInstantiator
     return castInstance;
   }
     
-  public Node Instantiate(PackedScene packedScene) => ResolveDependencies(packedScene.Instantiate());
-
-
+  public Node Instantiate(PackedScene packedScene) => _resolutionRoot.ResolveDependencies(packedScene.Instantiate());
+  
   public T Instantiate<T>(params object[] args) => (T)Instantiate(typeof(T), args);
     
   public object Instantiate(Type concreteType, params object[] args)
@@ -48,16 +48,4 @@ public class Instantiator : IInstantiator
     
   private static IParameter[] PrepareParameters(object[] args) =>
     args.Select(arg => new TypeMatchingConstructorArgument(arg.GetType(), (_, _) => arg) as IParameter).ToArray();
-
-  private Node ResolveDependencies(Node node, params IParameter[] args)
-  {
-    if (node != null)
-    {
-      _resolutionRoot.Inject(node, args);
-      foreach (Node child in node.GetChildren())
-        ResolveDependencies(child, args);
-    }
-
-    return node;
-  }
 }

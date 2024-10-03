@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://b6h8mmptwl2fj"]
+[gd_scene load_steps=78 format=3 uid="uid://b6h8mmptwl2fj"]
 
 [ext_resource type="Texture2D" uid="uid://c7u1jqbo1vgks" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/18-Air Attack 1/Air Attack 1 01.png" id="1_gnjgj"]
 [ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_t7cfp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/Node2DRegistrar.cs" id="5_h52ov"]
 [ext_resource type="Texture2D" uid="uid://dq0qbcsaomgq6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 02.png" id="5_rccrp"]
 [ext_resource type="Texture2D" uid="uid://4hkghlcdby1r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 03.png" id="6_al0vp"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/VisualDebugger2DRegistrar.cs" id="6_i6far"]
 [ext_resource type="Texture2D" uid="uid://b3w7sqyrdwxot" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 01.png" id="7_fj52s"]
 [ext_resource type="Texture2D" uid="uid://0s4freg8rjc4" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 02.png" id="8_3wmql"]
 [ext_resource type="Texture2D" uid="uid://cs3dwc7pkyi3r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 03.png" id="9_jflw6"]
@@ -73,6 +74,7 @@
 [ext_resource type="Texture2D" uid="uid://diotvbs0063ep" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 01.png" id="52_vrvso"]
 [ext_resource type="Texture2D" uid="uid://dd0r56avotda6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 02.png" id="53_cgycf"]
 [ext_resource type="Texture2D" uid="uid://bxfrpicdcb7ch" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 03.png" id="54_onqkl"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/VisualDebugger2D.cs" id="75_eb2wo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7v1ek"]
 animations = [{
@@ -205,7 +207,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ground",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -403,15 +405,24 @@ _characterBody2D = NodePath("../CharacterBody2D")
 script = ExtResource("5_h52ov")
 _node = NodePath("../CharacterBody2D")
 
+[node name="VisualDebugger2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_visualDebugger2D")]
+script = ExtResource("6_i6far")
+_visualDebugger2D = NodePath("../VisualDebugger2D")
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_7v1ek")
-animation = &"idle"
+animation = &"ground"
 autoplay = "idle"
+frame = 1
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_ryxot")
+
+[node name="VisualDebugger2D" type="Node2D" parent="."]
+script = ExtResource("75_eb2wo")

@@ -1,17 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://pfa6edybw5hh"]
+[gd_scene load_steps=5 format=3 uid="uid://pfa6edybw5hh"]
 
 [ext_resource type="Script" path="res://Code/Projects/Project.cs" id="1_m4axs"]
+[ext_resource type="Script" path="res://Code/Projects/Providers/Scenes/SceneRootRegistrar.cs" id="2_if6ms"]
+[ext_resource type="Script" path="res://Code/Projects/Providers/Root/RootRegistrar.cs" id="2_k0544"]
+[ext_resource type="Script" path="res://Code/Projects/Providers/Curtains/CurtainNodeRegistrar.cs" id="3_x1yy8"]
 
-[node name="Project" type="Node" node_paths=PackedStringArray("SceneRoot", "Curtain")]
+[node name="Project" type="Node"]
 script = ExtResource("1_m4axs")
-SceneRoot = NodePath("SceneRoot")
-Curtain = NodePath("CanvasLayer/Curtain")
 
-[node name="SceneRoot" type="Node" parent="."]
+[node name="Root" type="Node" parent="." node_paths=PackedStringArray("_root")]
+script = ExtResource("2_k0544")
+_root = NodePath(".")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="SceneRoot" type="Node" parent="Root"]
+script = ExtResource("2_if6ms")
 
-[node name="Curtain" type="ColorRect" parent="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Root"]
+
+[node name="CurtainNode" type="ColorRect" parent="Root/CanvasLayer"]
 visible = false
 z_index = 4096
 anchors_preset = 15
@@ -20,3 +26,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+script = ExtResource("3_x1yy8")

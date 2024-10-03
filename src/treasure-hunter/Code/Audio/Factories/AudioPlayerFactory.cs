@@ -3,51 +3,46 @@ using System.Collections.Generic;
 using Code.Audio.Nodes;
 using Code.Common.Extensions;
 using Code.Infrastructure.Instantioator;
-using Code.Infrastructure.StaticData;
-using Code.Projects;
+using Code.Projects.Providers.Root;
+using Code.StaticData;
 using Godot;
 
 namespace Code.Audio.Factories;
 
 public class AudioPlayerFactory : IAudioPlayerFactory, IDisposable
 {
-  private readonly IProject _project;
+  private readonly IRootProvider _root;
   private readonly IInstantiator _instantiator;
   private readonly IStaticDataService _staticDataService;
-  private readonly LinkedList<IAudioPlayer> _audioPlayers = new();
+  private readonly Stack<IAudioPlayer> _audioPlayers = new();
 
-  public AudioPlayerFactory(IInstantiator instantiator, IStaticDataService staticDataService, IProject project)
+  public AudioPlayerFactory(IInstantiator instantiator, IStaticDataService staticDataService, IRootProvider root)
   {
     _instantiator = instantiator;
     _staticDataService = staticDataService;
-    _project = project;
+    _root = root;
   }
 
   public IAudioPlayer PeekOrCreate()
   {
-    IAudioPlayer source;
-    if (_audioPlayers.Count > 0)
-    {
-      source = _audioPlayers.First.Value;
-      _audioPlayers.RemoveFirst();
-    }
-    else
+    if (!_audioPlayers.TryPop(out IAudioPlayer source))
     {
       PackedScene prefab = _staticDataService.AudioConfig.SourcePrefab;
       source = _instantiator.Instantiate<AudioPlayer>(prefab)
-        .With(n => _project.SceneRoot.AddChild(n));
+        .With(n => _root.Get.AddChild(n));
     }
 
+    source.Stop();
     return source;
   }
 
   public void Release(IAudioPlayer source)
   {
     source.Stop();
-    _audioPlayers.AddLast(source);
+    _audioPlayers.Push(source);
   }
 
-  public void Dispose()
+  void IDisposable.Dispose()
   {
     foreach (IAudioPlayer player in _audioPlayers) player.Destroy();
     

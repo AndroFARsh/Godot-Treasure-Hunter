@@ -1,4 +1,4 @@
-using Code.Infrastructure.Windows;
+using Code.Infrastructure.UI.Windows;
 using Godot;
 
 namespace Code.SettingsWindow;

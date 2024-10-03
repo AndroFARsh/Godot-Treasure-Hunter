@@ -50,6 +50,7 @@ public class HomeState : EndOfFrameNoPayloadState
     MarkAllEntitiesReadyToDestroy();
       
     _feature.TearDown();
+    _feature.Dispose();
     _feature = null;
   }
 

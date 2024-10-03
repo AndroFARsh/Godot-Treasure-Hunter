@@ -19,13 +19,11 @@ using Code.Infrastructure.ResourceManagement;
 using Code.Infrastructure.SceneManagement;
 using Code.Infrastructure.States;
 using Code.Infrastructure.States.Resolvers;
-using Code.Infrastructure.StaticData;
 using Code.Infrastructure.Systems;
 using Code.Infrastructure.Time;
 using Code.Infrastructure.UI;
-using Code.Infrastructure.Windows;
-using Code.Infrastructure.Windows.Factories;
-using Code.Infrastructure.Windows.Services;
+using Code.Infrastructure.UI.Windows.Factories;
+using Code.Infrastructure.UI.Windows.Services;
 using Code.Levels.Services;
 using Code.Levels.UI.Factories;
 using Code.Levels.UI.LevelsButton;
@@ -33,9 +31,13 @@ using Code.Levels.UI.LevelsMenu;
 using Code.PersistentData;
 using Code.PersistentData.SaveLoad;
 using Code.Projects.EntryPoint;
-using Code.Projects.Providers;
+using Code.Projects.Providers.Curtains;
+using Code.Projects.Providers.Game;
+using Code.Projects.Providers.Root;
+using Code.Projects.Providers.Scenes;
 using Code.Projects.Settings;
 using Code.SettingsWindow;
+using Code.StaticData;
 using Ninject.Modules;
 using Ninject.Syntax;
 
@@ -45,6 +47,8 @@ namespace Code.Projects.Modules
   {
     public override void Load()
     {
+      BindProviders(this);
+      
       BindContexts(this);
       
       BindCommonFactories(this);
@@ -58,7 +62,15 @@ namespace Code.Projects.Modules
       BindGameplayServices(this);
       BindGameplayFactories(this);
     }
-    
+
+    private static void BindProviders(ProjectModule binder)
+    {
+      binder.BindInterfacesAndSelfTo<RootProvider>().InSingletonScope();
+      binder.BindInterfacesAndSelfTo<SceneRootProvider>().InSingletonScope();
+      binder.BindInterfacesAndSelfTo<CurtainNodeProvider>().InSingletonScope();
+      binder.BindInterfacesAndSelfTo<GameRootProvider>().InSingletonScope();
+    }
+
     private static void BindContexts(IBindingRoot binder)
     {
       binder.Bind<GameContext>().ToConstant(Contexts.sharedInstance.game);
@@ -74,8 +86,6 @@ namespace Code.Projects.Modules
 
     private void BindCommonServices(IBindingRoot binder)
     {
-      binder.BindInterfacesAndSelfTo<GameRootProvider>().InSingletonScope();
-      
       binder.Bind<IProjectSettings>().To<ProjectSettings>().InSingletonScope();
       binder.Bind<ILifeTime>().To<LifeTime>().InSingletonScope();
       
@@ -128,7 +138,7 @@ namespace Code.Projects.Modules
     
     private static void BindUiViewPresenters(IBindingRoot binder)
     {
-      binder.Bind<IPresenterProvider>().To<PresenterProvider>().InSingletonScope();
+      binder.Bind<IPresenterResolver>().To<PresenterResolver>().InSingletonScope();
       
       binder.BindInterfacesTo<MainMenuUiPresenter>().InSingletonScope();
       

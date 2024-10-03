@@ -29,7 +29,6 @@ namespace Code.Infrastructure.States.Infrastructure
       _cancellationTokenSource = new CancellationTokenSource();
 
       await GDTask.WaitUntilCanceled(_cancellationTokenSource.Token); 
-        //FromCanceled(_cancellationTokenSource.Token);
       await OnExitAsync();
       
       _cancellationTokenSource.Dispose();

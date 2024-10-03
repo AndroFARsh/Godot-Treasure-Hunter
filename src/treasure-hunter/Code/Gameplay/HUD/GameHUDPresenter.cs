@@ -1,6 +1,6 @@
 using Code.Infrastructure.UI;
-using Code.Infrastructure.Windows;
-using Code.Infrastructure.Windows.Services;
+using Code.Infrastructure.UI.Windows;
+using Code.Infrastructure.UI.Windows.Services;
 
 namespace Code.Gameplay.HUD;
 

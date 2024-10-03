@@ -1,8 +1,8 @@
 using Code.Infrastructure.States;
 using Code.Infrastructure.Time;
 using Code.Infrastructure.UI;
-using Code.Infrastructure.Windows;
-using Code.Infrastructure.Windows.Services;
+using Code.Infrastructure.UI.Windows;
+using Code.Infrastructure.UI.Windows.Services;
 using Code.Projects.States;
 
 namespace Code.Gameplay.Windows.MenuWindow

@@ -34,13 +34,16 @@ public partial class AudioPlayer : Node, IAudioPlayer
 
   public void Stop()
   {
-    if (IsPlaying)
-      _audioStream.Stop();
+    _audioStream.Stop();
+    _audioStream.Stream = null;
   }
 
   public void Destroy()
   {
-    Stop();
-    QueueFree();
+    _audioStream.Stop();
+    _audioStream.Stream = null;
+    _audioStream.GetParent().RemoveChild(_audioStream);
+    _audioStream.QueueFree();
+    _audioStream = null;
   }
 }

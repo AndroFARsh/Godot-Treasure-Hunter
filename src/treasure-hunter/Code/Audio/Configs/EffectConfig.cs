@@ -8,4 +8,10 @@ public partial class EffectConfig : Resource
   [Export] public EffectName Name;
   [Export(PropertyHint.Range, "-1, 1")] public float Pint;
   [Export] public AudioStream Value;
+  
+  protected override void Dispose(bool disposing)
+  {
+    base.Dispose(disposing);
+    Value = null;
+  }
 }

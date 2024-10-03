@@ -1,10 +1,10 @@
 using Code.Infrastructure.States;
-using Code.Infrastructure.StaticData;
 using Code.Infrastructure.UI;
 using Code.Levels.Configs;
 using Code.Levels.Services;
 using Code.PersistentData;
 using Code.Projects.States;
+using Code.StaticData;
 
 namespace Code.Levels.UI.LevelsButton
 {
