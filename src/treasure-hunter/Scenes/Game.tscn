@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://coxth8ysvx6lh"]
 
 [ext_resource type="PackedScene" uid="uid://bpxfxyngh8is7" path="res://Resources/Prefabs/GameHUD.tscn" id="1_1jjvs"]
-[ext_resource type="Script" path="res://Code/Gameplay/GameScene.cs" id="1_wacbe"]
+[ext_resource type="Script" path="res://Code/Projects/Providers/Game/GameRootRegistrar.cs" id="1_wacbe"]
 [ext_resource type="PackedScene" uid="uid://ca4h7cjkuf2jj" path="res://Resources/Prefabs/WindowRoot.tscn" id="2_13b3r"]
 [ext_resource type="Texture2D" uid="uid://6w6j278y0yet" path="res://Resources/Treasure Hunter/Pirate Ship/Sprites/Tilesets/Terrain and Back Wall (32x32).png" id="2_f44k3"]
 [ext_resource type="Texture2D" uid="uid://nwei3u4tgsnj" path="res://Resources/Treasure Hunter/Pirate Ship/Sprites/Tilesets/Platforms (32x32).png" id="3_xqpkx"]

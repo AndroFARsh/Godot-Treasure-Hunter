@@ -1,5 +1,5 @@
-using Code.Infrastructure.StaticData;
 using Code.Levels.Configs;
+using Code.StaticData;
 
 namespace Code.Levels.Services
 {

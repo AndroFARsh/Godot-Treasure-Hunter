@@ -8,9 +8,9 @@ public abstract partial class BaseUiView : Control, IUiView
   private IUiViewPresenter _presenter;
 
   [Inject]
-  public void Construct(IPresenterProvider presenterProvider)
+  public void Construct(IPresenterResolver presenterResolver)
   {
-    presenterProvider.TryGetPresenter(this, out _presenter);
+    presenterResolver.TryResolve(this, out _presenter);
   }
   
   public override void _EnterTree()

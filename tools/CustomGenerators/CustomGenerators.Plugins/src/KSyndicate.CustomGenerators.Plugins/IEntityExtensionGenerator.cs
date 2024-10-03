@@ -127,8 +127,11 @@ public static class IEntityExtensions
       throw new System.Exception($""{nameof(entity.GetType)} do not support component: {nameof(componentType)}"");
   }
 
-  public static bool TryRemoveComponent<TComponent>(this Entitas.IEntity entity, TComponent component)
-    where TComponent : class, Entitas.IComponent => TryRemoveComponent(entity, component.GetType());
+  public static bool TryRemoveComponent<TComponent>(this Entitas.IEntity entity)
+    where TComponent : class, Entitas.IComponent => TryRemoveComponent(entity, typeof(TComponent));
+
+  public static bool TryRemoveComponent<TComponent>(this Entitas.IEntity entity, out TComponent component)
+    where TComponent : class, Entitas.IComponent => TryGetComponent<TComponent>(entity, out component) && TryRemoveComponent<TComponent>(entity);
 
   public static bool TryRemoveComponent(this Entitas.IEntity entity, System.Type componentType)
   {

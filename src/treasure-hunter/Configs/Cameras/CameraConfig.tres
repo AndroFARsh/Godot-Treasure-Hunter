@@ -6,3 +6,7 @@
 [resource]
 script = ExtResource("1_hhqgd")
 Prefab = ExtResource("1_f2a7w")
+FollowType = 3
+SnappingType = 1
+SnappingSpeed = 2.0
+CameraWindow = Rect2(-100, -50, 200, 100)

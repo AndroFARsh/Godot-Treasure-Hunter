@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Infrastructure.Instantioator;
 using Code.Projects;
+using Code.Projects.Providers.Scenes;
 using Godot;
 using GodotTask;
 
@@ -9,11 +10,11 @@ namespace Code.Infrastructure.SceneManagement
 {
   public class SceneLoader : ISceneLoader, IDisposable
   {
-    private readonly IProject _root;
+    private readonly ISceneRootProvider _root;
     private readonly Instantiator _instantiator;
     private readonly IDictionary<string, Node> _scenes = new Dictionary<string, Node>();
     
-    public SceneLoader(IProject root, Instantiator instantiator)
+    public SceneLoader(ISceneRootProvider root, Instantiator instantiator)
     {
       _root = root;
       _instantiator = instantiator;
@@ -25,21 +26,21 @@ namespace Code.Infrastructure.SceneManagement
     {
       Node scene = await GDTask.RunOnThreadPool(() => LoadAndInstantiateScene(path));
       _scenes.Add(path, scene);
-      _root.SceneRoot.AddChild(scene);
+      _root.Get.AddChild(scene);
     }
 
     public void LoadScene(string path)
     {
       Node scene = LoadAndInstantiateScene(path);
       _scenes.Add(path, scene);
-      _root.SceneRoot.AddChild(scene);
+      _root.Get.AddChild(scene);
     }
 
     public void UnloadAllScenes()
     {
       foreach (Node child in _scenes.Values)
       {
-        _root.SceneRoot.RemoveChild(child);
+        _root.Get.RemoveChild(child);
         child.QueueFree();
       }
 
@@ -50,7 +51,7 @@ namespace Code.Infrastructure.SceneManagement
     {
       if (_scenes.Remove(path, out Node scene) && scene != null)
       {
-        _root.SceneRoot.RemoveChild(scene);
+        scene.GetParent()?.RemoveChild(scene);
         scene.QueueFree();
       }
     }
@@ -61,7 +62,7 @@ namespace Code.Infrastructure.SceneManagement
     {
       foreach (Node scene in _scenes.Values)
       {
-        _root.SceneRoot.RemoveChild(scene);
+        scene.GetParent()?.RemoveChild(scene);
         scene.QueueFree();
       }
       _scenes.Clear();

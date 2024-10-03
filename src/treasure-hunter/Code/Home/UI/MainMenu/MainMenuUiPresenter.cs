@@ -1,7 +1,8 @@
 using Code.Infrastructure.States;
 using Code.Infrastructure.UI;
-using Code.Infrastructure.Windows;
-using Code.Infrastructure.Windows.Services;
+using Code.Infrastructure.UI.Windows;
+using Code.Infrastructure.UI.Windows.Services;
+using Code.Projects.Providers.Root;
 using Code.Projects.Settings;
 using Code.Projects.States;
 
@@ -12,15 +13,18 @@ public class MainMenuUiPresenter : IUiViewPresenter
   private readonly IStateMachine _stateMachine;
   private readonly IWindowService _windowService;
   private readonly IProjectSettings _projectSettings;
-  
+  private readonly IRootProvider _rootProvider;
+
   public MainMenuUiPresenter(
     IStateMachine stateMachine, 
     IWindowService windowService, 
-    IProjectSettings projectSettings)
+    IProjectSettings projectSettings,
+    IRootProvider rootProvider)
   {
     _stateMachine = stateMachine;
     _windowService = windowService;
     _projectSettings = projectSettings;
+    _rootProvider = rootProvider;
   }
 
   public bool IsSupported(IUiView view) => view is MainMenuUiView;
@@ -47,7 +51,7 @@ public class MainMenuUiPresenter : IUiViewPresenter
   
   private void OnPlayClick() => _stateMachine.Enter<LoadLevelsState>();
 
-  private void OnQuitClick() => _stateMachine.Enter<QuitState>();
+  private void OnQuitClick() => _rootProvider.Quit();
     
   private void OnSettingsClick() => _windowService.Push(WindowName.SettingsWindow);
 }

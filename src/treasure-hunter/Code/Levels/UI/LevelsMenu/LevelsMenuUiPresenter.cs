@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Code.Infrastructure.States;
-using Code.Infrastructure.StaticData;
 using Code.Infrastructure.UI;
 using Code.Levels.UI.Factories;
 using Code.Levels.UI.LevelsButton;
 using Code.Projects.States;
+using Code.StaticData;
 
 namespace Code.Levels.UI.LevelsMenu
 {

@@ -1,7 +1,8 @@
 using Code.Common.Curtains.Configs;
-using Code.Infrastructure.StaticData;
 using Code.Infrastructure.Time;
 using Code.Projects;
+using Code.Projects.Providers.Curtains;
+using Code.StaticData;
 using Godot;
 using GodotTask;
 
@@ -12,25 +13,26 @@ namespace Code.Common.Curtains
     private bool _inProgress;
     private bool _shown;
     
-    private readonly IProject _root;
+    private readonly ICurtainNodeProvider _nodeProvider;
     private readonly IStaticDataService _staticDataService;
     private readonly ITimeService _timeService;
     
-    public CurtainService(IProject root, IStaticDataService staticDataService, ITimeService timeService)
+    public CurtainService(ICurtainNodeProvider nodeProvider, IStaticDataService staticDataService, ITimeService timeService)
     {
-      _root = root;
+      _nodeProvider = nodeProvider;
       _staticDataService = staticDataService;
       _timeService = timeService;
     }
     
     public async GDTask ShowCurtain()
     {
-      if (_inProgress || _shown) return;
+      ColorRect curtain = _nodeProvider.Get;
+      if (_inProgress || _shown || curtain == null) return;
       _inProgress = true;
       _shown = true;
-      
-      _root.Curtain.Visible = true;
-      _root.Curtain.Color = _root.Curtain.Color with { A = 0f };
+
+      curtain.Visible = true;
+      curtain.Color = curtain.Color with { A = 0f };
 
       CurtainConfig config = _staticDataService.CurtainConfig;
       float time = config.FadeInCurve.MinValue;
@@ -41,22 +43,23 @@ namespace Code.Common.Curtains
           config.FadeInCurve.MinValue, 
           config.FadeInCurve.MaxValue
         );
-        _root.Curtain.Color = _root.Curtain.Color with { A =  Mathf.Clamp(config.FadeInCurve.Sample(time), 0, 1f) };
+        curtain.Color = curtain.Color with { A =  Mathf.Clamp(config.FadeInCurve.Sample(time), 0, 1f) };
 
         await GDTask.NextFrame();
       }
 
-      _root.Curtain.Color = _root.Curtain.Color with { A = 1f };
+      curtain.Color = curtain.Color with { A = 1f };
       _inProgress = false;
     }
 
     public async GDTask HideCurtain()
     {
-      if (_inProgress || !_shown) return;
+      ColorRect curtain = _nodeProvider.Get;
+      if (_inProgress || !_shown || curtain == null) return;
       _inProgress = true;
 
-      _root.Curtain.Visible = true;
-      _root.Curtain.Color = _root.Curtain.Color with { A = 1f };
+      curtain.Visible = true;
+      curtain.Color = curtain.Color with { A = 1f };
 
       CurtainConfig config = _staticDataService.CurtainConfig;
       float time = config.FadeOutCurve.MinValue;
@@ -67,7 +70,7 @@ namespace Code.Common.Curtains
           config.FadeOutCurve.MinValue, 
           config.FadeOutCurve.MaxValue
         );
-        _root.Curtain.Color = _root.Curtain.Color with { A = Mathf.Clamp(config.FadeOutCurve.Sample(time), 0, 1f) };
+        curtain.Color = curtain.Color with { A = Mathf.Clamp(config.FadeOutCurve.Sample(time), 0, 1f) };
         
         await GDTask.NextFrame();
       }
@@ -75,8 +78,8 @@ namespace Code.Common.Curtains
       _shown = false;
       _inProgress = false;
 
-      _root.Curtain.Color = _root.Curtain.Color with { A = 0f };
-      _root.Curtain.Visible = false;
+      curtain.Color = curtain.Color with { A = 0f };
+      curtain.Visible = false;
     }
   }
 }

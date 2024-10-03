@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="WindowConfig" load_steps=9 format=3 uid="uid://ujhnwf4ra6mu"]
+
+[ext_resource type="Script" path="res://Code/Infrastructure/UI/Windows/Configs/WindowConfig.cs" id="1_ceu87"]
+[ext_resource type="PackedScene" uid="uid://be5tyjrmu1qra" path="res://Resources/Prefabs/SettingsWindow.tscn" id="1_gbjtm"]
+[ext_resource type="Script" path="res://Code/Infrastructure/UI/Windows/Configs/WindowName2Prefab.cs" id="2_boskn"]
+[ext_resource type="PackedScene" uid="uid://byx0mra31077c" path="res://Resources/Prefabs/GameMenuWindow.tscn" id="3_3i2o8"]
+
+[sub_resource type="Curve" id="Curve_18tlu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_fi311"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_lkvbo"]
+script = ExtResource("2_boskn")
+Name = 4
+Prefab = ExtResource("1_gbjtm")
+
+[sub_resource type="Resource" id="Resource_hlc1d"]
+script = ExtResource("2_boskn")
+Name = 1
+Prefab = ExtResource("3_3i2o8")
+
+[resource]
+script = ExtResource("1_ceu87")
+MaxAlpha = 0.8
+FadeInSpeed = 2.5
+FadeInCurve = SubResource("Curve_18tlu")
+FadeOutSpeed = 2.5
+FadeOutCurve = SubResource("Curve_fi311")
+Prefabs = [SubResource("Resource_lkvbo"), SubResource("Resource_hlc1d")]
