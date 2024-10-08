@@ -10,7 +10,7 @@ public class CharacterFactory : ICharacterFactory
 {
   private readonly IEntityFactory _entityFactory;
   private readonly IStaticDataService _staticDataService;
-  
+
   public CharacterFactory(IEntityFactory entityFactory, IStaticDataService staticDataService)
   {
     _entityFactory = entityFactory;
@@ -20,18 +20,17 @@ public class CharacterFactory : ICharacterFactory
   public GameEntity Create()
   {
     CharacterConfig config = _staticDataService.CharacterConfig;
-    return _entityFactory.CreateEntity<GameEntity>()
+    GameEntity characterEntity = _entityFactory.CreateEntity<GameEntity>()
         .AddViewPrefab(config.Prefab)
-        .AddFacing(1)
+        .AddFacingFlip(false)
         .AddCharacterConfig(config)
-        .AddGravity(config.GravityStrength)
-        .With(e => e.isApplyGravity = true)
-        .AddJumpVelocity(config.JumpVelocity)
-        .AddMaxSpeed(config.RunMaxSpeed)
-        .With(e => e.isDoConserveMomentum = config.DoConserveMomentum)
+        .AddGravityScale(1)
+        .AddAirVelocity(0)
+        .AddLateralVelocity(0)
         .AddVelocity(Vector2.Zero)
-        .With(e => e.isMovable = true)
         .With(e => e.isCharacter = true)
       ;
+    
+    return characterEntity;
   }
 }

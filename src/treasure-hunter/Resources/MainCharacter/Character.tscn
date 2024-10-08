@@ -409,11 +409,15 @@ _node = NodePath("../CharacterBody2D")
 script = ExtResource("6_i6far")
 _visualDebugger2D = NodePath("../VisualDebugger2D")
 
+[node name="CellingChecker2DRegistrar" type="Node" parent="."]
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 30719
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-position = Vector2(0, -12)
+position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_7v1ek")
 animation = &"ground"
 autoplay = "idle"
@@ -423,6 +427,26 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_ryxot")
+
+[node name="RayCast2DForwardFar" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(10, -10)
+target_position = Vector2(0, -20)
+collision_mask = 1179647
+
+[node name="RayCast2DForward" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(5, -10)
+target_position = Vector2(0, -15)
+collision_mask = 1179647
+
+[node name="RayCast2DBackward" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-5, -10)
+target_position = Vector2(0, -15)
+collision_mask = 1179647
+
+[node name="RayCast2DBackwardFar" type="RayCast2D" parent="CharacterBody2D"]
+position = Vector2(-10, -10)
+target_position = Vector2(0, -20)
+collision_mask = 1179647
 
 [node name="VisualDebugger2D" type="Node2D" parent="."]
 script = ExtResource("75_eb2wo")
