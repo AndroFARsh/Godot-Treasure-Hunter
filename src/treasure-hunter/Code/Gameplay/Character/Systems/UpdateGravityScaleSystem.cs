@@ -25,17 +25,21 @@ public class UpdateGravityScaleSystem : IExecuteSystem
       float gravityScale = 1f;
       if (entity.isInAir)
       {
-        if (ShouldCutJump(input, entity)) 
+        if (IsJustAirJump(entity))
+          gravityScale = 1;
+        else if (ShouldCutJump(input, entity)) 
           gravityScale = entity.CharacterConfig.JumpCutGravityScale;
         else if (ShouldAirHang(entity))
           gravityScale = ResolveApexHangGravityScale(entity);
-        else if (ShouldFall(entity)) 
+        else if (IsFalling(entity)) 
           gravityScale = entity.CharacterConfig.FallGravityScale;
       }
 
       entity.ReplaceGravityScale(gravityScale);
     }
   }
+
+  private static bool IsJustAirJump(GameEntity entity) => entity.isJustAirJump;
 
   private static float ResolveApexHangGravityScale(GameEntity entity)
   {
@@ -45,9 +49,7 @@ public class UpdateGravityScaleSystem : IExecuteSystem
     return entity.CharacterConfig.JumpHangGravityScale;
   }
 
-  private static bool ShouldFall(GameEntity entity) =>
-    entity.CharacterConfig.JumpCutGravityScaleFeature &&
-    entity.isFalling;
+  private static bool IsFalling(GameEntity entity) => entity.isFalling;
 
   private static bool ShouldCutJump(InputEntity input, GameEntity entity) =>
     entity.CharacterConfig.JumpCutGravityScaleFeature && 

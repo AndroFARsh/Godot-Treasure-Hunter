@@ -56,7 +56,7 @@ public partial class CharacterConfig : Resource
   [ExportGroup("Air Jump")]
   // Height of the player's air jump
   [Export] public float AirJumpHeightScale = 0.75f;
-  [Export] public int NumberOfAirJump = 1;
+  [Export] public int AirJumpNumber = 2;
   
   public float AirJumpHeight => JumpHeight * AirJumpHeightScale;
   public float AirJumpVelocity => JumpVelocity * AirJumpHeightScale;

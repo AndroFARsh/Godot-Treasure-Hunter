@@ -44,22 +44,19 @@ public class HandleGroundJumpSystem : IExecuteSystem
 
   private static void HandleCoyoteTime(GameEntity entity)
   {
-    if (entity.isInAir && entity.isPrevFrameOnFloor && !entity.isGoingUp && !entity.isJumping)
+    if (entity.isInAir && entity.isPrevFrameOnFloor && !entity.isGoingUp && !entity.isGroundJumping)
       entity.ReplaceCoyoteTimer(entity.CharacterConfig.CoyoteTime);
 
-    if (entity.hasCoyoteTimer && !entity.isJumping)
+    if (entity.hasCoyoteTimer && !entity.isGroundJumping)
       entity.ReplaceAirVelocity(0);
   }
 
   private static bool AllowGroundJump(InputEntity input, GameEntity entity) =>
-    input.isJumpJustPressed && !entity.isJumping && (entity.isOnFloor || entity.hasCoyoteTimer);
-
-  private static bool HasJustLanded(GameEntity entity) =>
-    entity.isOnFloor && !entity.isPrevFrameOnFloor && entity.isJumping;
+    input.isJumpJustPressed && !entity.isGroundJumping && (entity.isOnFloor || entity.hasCoyoteTimer);
 
   private static void Jump(GameEntity entity)
   {
-    entity.isJumping = true;
+    entity.isGroundJumping = true;
     entity.ReplaceAirVelocity(entity.CharacterConfig.JumpVelocity);
     entity.TryRemoveComponent<CoyoteTimerComponent>();
   }
