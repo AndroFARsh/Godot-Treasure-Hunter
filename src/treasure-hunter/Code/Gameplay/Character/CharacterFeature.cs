@@ -20,6 +20,7 @@ public sealed class CharacterFeature : Feature
 
     Add(systems.Create<HandleJustLandedSystem>());
     Add(systems.Create<HandleGroundJumpSystem>());
+    Add(systems.Create<HandleAirJumpSystem>());
     
     Add(systems.Create<UpdateFacingSystem>());
     Add(systems.Create<ApplyLateralMovementSystem>());
@@ -28,7 +29,7 @@ public sealed class CharacterFeature : Feature
     Add(systems.Create<MergeVelocitySystem>());
 
 #if DEBUG
-    Add(systems.Create<PlayerJumpHeightDebugSystem>());
+    Add(systems.Create<JumpHeightDebugSystem>());
     Add(systems.Create<CoyoteTimerDebugSystem>());
     Add(systems.Create<JumpBufferInputTimerDebugSystem>());
 #endif

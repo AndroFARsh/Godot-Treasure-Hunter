@@ -3,7 +3,6 @@ using Entitas;
 
 namespace Code.Gameplay.Character;
 
-
 [Game] public class InAirComponent : IComponent { }
 [Game] public class PrevFrameInAirComponent : IComponent { }
 
@@ -23,9 +22,11 @@ namespace Code.Gameplay.Character;
 [Game] public class LateralVelocityComponent : IComponent { public float Value; }
 
 // Ground Jump
-[Game] public class JumpingComponent : IComponent { }
+[Game] public class GroundJumpingComponent : IComponent { }
+[Game] public class AirJumpNumberComponent : IComponent { public int Value; }
+[Game] public class JustAirJumpComponent : IComponent { }
 
-// 
+// Timers
 [Game] public class JumpBufferInputTimerComponent : IComponent { public float Value; }
 [Game] public class CoyoteTimerComponent : IComponent { public float Value; }
 [Game] public class JumpApexHangTimerComponent : IComponent { public float Value; }

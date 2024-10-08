@@ -11,15 +11,18 @@ public class HandleJustLandedSystem : IExecuteSystem
     _entities = game.GetGroup(
       GameMatcher.AllOf(
         GameMatcher.Character,
+        GameMatcher.CharacterConfig,
         GameMatcher.OnFloor,
-        GameMatcher.PrevFrameInAir,
-        GameMatcher.Jumping)
+        GameMatcher.PrevFrameInAir)
     );
   }
 
   public void Execute()
   {
     foreach (GameEntity entity in _entities)
-      entity.isJumping = false;
+    {
+      entity.isGroundJumping = false;
+      entity.ReplaceAirJumpNumber(entity.CharacterConfig.AirJumpNumber);
+    }
   }
 }
