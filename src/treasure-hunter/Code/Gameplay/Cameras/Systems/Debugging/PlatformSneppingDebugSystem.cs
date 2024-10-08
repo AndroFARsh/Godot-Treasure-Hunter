@@ -13,10 +13,11 @@ public class PlatformSnappingDebugSystem : IExecuteSystem, IDebugSystem
   public PlatformSnappingDebugSystem(GameContext game)
   {
     _character = game.GetGroup(GameMatcher
-      .AllOf(GameMatcher.Character, GameMatcher.Node2D, GameMatcher.Grounded));
+      .AllOf(GameMatcher.Character, GameMatcher.Node2D, GameMatcher.OnFloor));
 
     _cameras = game.GetGroup(
       GameMatcher.AllOf(
+        GameMatcher.InAir,
         GameMatcher.PlatformSnapping,
         GameMatcher.PositionSnappingSpeed,
         GameMatcher.Camera2D,

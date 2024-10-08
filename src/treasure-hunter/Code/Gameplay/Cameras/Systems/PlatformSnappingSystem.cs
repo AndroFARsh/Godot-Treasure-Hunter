@@ -14,10 +14,11 @@ public class PlatformSnappingSystem : IExecuteSystem
   {
     _timeService = timeService;
     _character = game.GetGroup(GameMatcher
-      .AllOf(GameMatcher.Character, GameMatcher.Node2D, GameMatcher.Grounded));
+      .AllOf(GameMatcher.Character, GameMatcher.Node2D, GameMatcher.OnFloor));
 
     _cameras = game.GetGroup(
       GameMatcher.AllOf(
+        GameMatcher.OnFloor,
         GameMatcher.PlatformSnapping,
         GameMatcher.PositionSnappingSpeed,
         GameMatcher.Camera2D,

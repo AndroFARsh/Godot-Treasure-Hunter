@@ -59,7 +59,7 @@ public static class IEntityExtensions
   public static bool TryAddComponent(this Entitas.IEntity entity, Entitas.IComponent component)
   {
     int componentIndex = LookUpComponentIndex(entity, component.GetType());
-    if (componentIndex >= 0 && entity.HasComponent(componentIndex))
+    if (componentIndex >= 0 && !entity.HasComponent(componentIndex))
     {
       entity.AddComponent(componentIndex, component);
       return true;

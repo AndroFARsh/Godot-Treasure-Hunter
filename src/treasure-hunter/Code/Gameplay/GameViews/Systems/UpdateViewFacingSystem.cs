@@ -10,14 +10,12 @@ public class UpdateViewFacingSystem : IExecuteSystem
   public UpdateViewFacingSystem(GameContext game)
   {
     _entities = game.GetGroup(GameMatcher
-      .AllOf(GameMatcher.Facing, GameMatcher.AnimatedSprite2D));
+      .AllOf(GameMatcher.FacingFlip, GameMatcher.AnimatedSprite2D));
   }
 
   public void Execute()
   {
     foreach (GameEntity entity in _entities)
-    {
-      entity.AnimatedSprite2D.FlipH = entity.Facing < 0;
-    }
+      entity.AnimatedSprite2D.FlipH = entity.FacingFlip;
   }
 }
