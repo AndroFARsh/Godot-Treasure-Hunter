@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://b6h8mmptwl2fj"]
+[gd_scene load_steps=79 format=3 uid="uid://b6h8mmptwl2fj"]
 
 [ext_resource type="Texture2D" uid="uid://c7u1jqbo1vgks" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/18-Air Attack 1/Air Attack 1 01.png" id="1_gnjgj"]
 [ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_t7cfp"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dq0qbcsaomgq6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 02.png" id="5_rccrp"]
 [ext_resource type="Texture2D" uid="uid://4hkghlcdby1r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 03.png" id="6_al0vp"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/VisualDebugger2DRegistrar.cs" id="6_i6far"]
+[ext_resource type="Script" path="res://Code/Gameplay/Character/Registrars/CeilingHitSensor2DRegistrar.cs" id="7_clo5p"]
 [ext_resource type="Texture2D" uid="uid://b3w7sqyrdwxot" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 01.png" id="7_fj52s"]
 [ext_resource type="Texture2D" uid="uid://0s4freg8rjc4" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 02.png" id="8_3wmql"]
 [ext_resource type="Texture2D" uid="uid://cs3dwc7pkyi3r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 03.png" id="9_jflw6"]
@@ -409,7 +410,12 @@ _node = NodePath("../CharacterBody2D")
 script = ExtResource("6_i6far")
 _visualDebugger2D = NodePath("../VisualDebugger2D")
 
-[node name="CelingHitCheckRegistrar" type="Node" parent="."]
+[node name="CeilingHitSensor2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_rayCast2DForwardFar", "_rayCast2DForward", "_rayCast2DBackward", "_rayCast2DBackwardFar")]
+script = ExtResource("7_clo5p")
+_rayCast2DForwardFar = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DForwardFar")
+_rayCast2DForward = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DForward")
+_rayCast2DBackward = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DBackward")
+_rayCast2DBackwardFar = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DBackwardFar")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2147483648
@@ -428,25 +434,25 @@ frame_progress = 1.0
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_ryxot")
 
-[node name="CeilingHitCheck" type="Node2D" parent="CharacterBody2D"]
+[node name="CeilingHitSensor2D" type="Node2D" parent="CharacterBody2D"]
 position = Vector2(0, -10)
 
-[node name="RayCast2DForwardFar" type="RayCast2D" parent="CharacterBody2D/CeilingHitCheck"]
+[node name="RayCast2DForwardFar" type="RayCast2D" parent="CharacterBody2D/CeilingHitSensor2D"]
 position = Vector2(10, 0)
 target_position = Vector2(0, -20)
 collision_mask = 255
 
-[node name="RayCast2DForward" type="RayCast2D" parent="CharacterBody2D/CeilingHitCheck"]
-position = Vector2(5, 0)
-target_position = Vector2(0, -15)
+[node name="RayCast2DForward" type="RayCast2D" parent="CharacterBody2D/CeilingHitSensor2D"]
+position = Vector2(3, 0)
+target_position = Vector2(0, -20)
 collision_mask = 255
 
-[node name="RayCast2DBackward" type="RayCast2D" parent="CharacterBody2D/CeilingHitCheck"]
-position = Vector2(-5, 0)
-target_position = Vector2(0, -15)
+[node name="RayCast2DBackward" type="RayCast2D" parent="CharacterBody2D/CeilingHitSensor2D"]
+position = Vector2(-3, 0)
+target_position = Vector2(0, -20)
 collision_mask = 255
 
-[node name="RayCast2DBackwardFar" type="RayCast2D" parent="CharacterBody2D/CeilingHitCheck"]
+[node name="RayCast2DBackwardFar" type="RayCast2D" parent="CharacterBody2D/CeilingHitSensor2D"]
 position = Vector2(-10, 0)
 target_position = Vector2(0, -20)
 collision_mask = 255

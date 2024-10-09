@@ -1,5 +1,6 @@
 using Code.Gameplay.Character.Configs;
 using Entitas;
+using Godot;
 
 namespace Code.Gameplay.Character;
 
@@ -30,6 +31,12 @@ namespace Code.Gameplay.Character;
 [Game] public class JumpBufferInputTimerComponent : IComponent { public float Value; }
 [Game] public class CoyoteTimerComponent : IComponent { public float Value; }
 [Game] public class JumpApexHangTimerComponent : IComponent { public float Value; }
+
+// Ceiling
+[Game] public class CeilingHitSensorForwardFarComponent : IComponent { public RayCast2D Value; }
+[Game] public class CeilingHitSensorForwardComponent : IComponent { public RayCast2D Value; }
+[Game] public class CeilingHitSensorBackwardComponent : IComponent { public RayCast2D Value; }
+[Game] public class CeilingHitSensorBackwardFarComponent : IComponent { public RayCast2D Value; }
 
 // Character
 [Game] public class CharacterComponent : IComponent { }
