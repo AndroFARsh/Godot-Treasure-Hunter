@@ -12,6 +12,7 @@ public class HandleJustLandedSystem : IExecuteSystem
       GameMatcher.AllOf(
         GameMatcher.Character,
         GameMatcher.CharacterConfig,
+        GameMatcher.LandAnimator2D,
         GameMatcher.OnFloor,
         GameMatcher.PrevFrameInAir)
     );
@@ -23,6 +24,7 @@ public class HandleJustLandedSystem : IExecuteSystem
     {
       entity.isGroundJumping = false;
       entity.ReplaceAirJumpNumber(entity.CharacterConfig.AirJumpNumber);
+      entity.LandAnimator2D.Play(entity.CharacterConfig.LandSquashScaleFactor, entity.CharacterConfig.LandSquashDuration);
     }
   }
 }

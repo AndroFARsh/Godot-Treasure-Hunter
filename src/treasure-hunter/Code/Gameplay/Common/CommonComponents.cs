@@ -16,4 +16,6 @@ namespace Code.Gameplay.Common;
 
 [Game] public class VisualDebugger2DComponent : IComponent { public VisualDebugger2D Value; }
 
+[Game] public class TargetIdComponent : IComponent { public ulong Value; }
+
 

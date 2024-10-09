@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://b6h8mmptwl2fj"]
+[gd_scene load_steps=81 format=3 uid="uid://b6h8mmptwl2fj"]
 
 [ext_resource type="Texture2D" uid="uid://c7u1jqbo1vgks" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/18-Air Attack 1/Air Attack 1 01.png" id="1_gnjgj"]
 [ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_t7cfp"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Code/Gameplay/Character/Registrars/CeilingHitSensor2DRegistrar.cs" id="7_clo5p"]
 [ext_resource type="Texture2D" uid="uid://b3w7sqyrdwxot" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 01.png" id="7_fj52s"]
 [ext_resource type="Texture2D" uid="uid://0s4freg8rjc4" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 02.png" id="8_3wmql"]
+[ext_resource type="Script" path="res://Code/Gameplay/Character/Registrars/LandAnimator2DRegistrar.cs" id="8_ibh4o"]
 [ext_resource type="Texture2D" uid="uid://cs3dwc7pkyi3r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 03.png" id="9_jflw6"]
 [ext_resource type="Texture2D" uid="uid://b2j4r84jcbruf" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/16-Attack 2/Attack 2 01.png" id="10_tx7da"]
 [ext_resource type="Texture2D" uid="uid://djdl1fxybska3" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/16-Attack 2/Attack 2 02.png" id="11_q8cyk"]
@@ -76,6 +77,7 @@
 [ext_resource type="Texture2D" uid="uid://dd0r56avotda6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 02.png" id="53_cgycf"]
 [ext_resource type="Texture2D" uid="uid://bxfrpicdcb7ch" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 03.png" id="54_onqkl"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/VisualDebugger2D.cs" id="75_eb2wo"]
+[ext_resource type="Script" path="res://Code/Gameplay/Character/Nodes/LandAnimator2D.cs" id="77_wptf8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7v1ek"]
 animations = [{
@@ -417,6 +419,10 @@ _rayCast2DForward = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DFor
 _rayCast2DBackward = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DBackward")
 _rayCast2DBackwardFar = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DBackwardFar")
 
+[node name="LandAnimator2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_landAnimator2D")]
+script = ExtResource("8_ibh4o")
+_landAnimator2D = NodePath("../CharacterBody2D/LandAnimator2D")
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2147483648
 collision_mask = 30719
@@ -425,10 +431,9 @@ collision_mask = 30719
 texture_filter = 1
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_7v1ek")
-animation = &"ground"
+animation = &"run"
 autoplay = "idle"
-frame = 1
-frame_progress = 1.0
+frame_progress = 0.617836
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -8)
@@ -456,6 +461,10 @@ collision_mask = 255
 position = Vector2(-10, 0)
 target_position = Vector2(0, -20)
 collision_mask = 255
+
+[node name="LandAnimator2D" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("_node2D")]
+script = ExtResource("77_wptf8")
+_node2D = NodePath("..")
 
 [node name="VisualDebugger2D" type="Node2D" parent="."]
 script = ExtResource("75_eb2wo")

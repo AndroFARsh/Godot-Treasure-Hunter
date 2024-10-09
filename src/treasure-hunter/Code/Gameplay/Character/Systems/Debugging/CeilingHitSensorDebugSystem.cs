@@ -1,4 +1,3 @@
-using Code.Gameplay.Character.Configs;
 using Code.Gameplay.Common.Nodes;
 using Entitas;
 using Entitas.Godot;
@@ -11,8 +10,6 @@ namespace Code.Gameplay.Character.Systems.Debugging;
 public class CeilingHitSensorDebugSystem : IExecuteSystem, IDebugSystem
 {
   private readonly IGroup<GameEntity> _entities;
-
-  public bool IsActive => true;
 
   public CeilingHitSensorDebugSystem(GameContext game)
   {

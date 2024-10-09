@@ -2,6 +2,7 @@ using Code.Common.CleanUp;
 using Code.Common.View;
 using Code.Gameplay.Cameras;
 using Code.Gameplay.Character;
+using Code.Gameplay.CharacterParticleEffects;
 using Code.Gameplay.GameViews;
 using Code.Gameplay.Inputs;
 using Code.Infrastructure.Systems;
@@ -15,6 +16,8 @@ public class GameplayFeature : Feature
     Add(systems.Create<InputFeature>());
     
     Add(systems.Create<CharacterFeature>());
+    Add(systems.Create<ParticleEffectFeature>());
+    
     Add(systems.Create<CameraFeature>());
     
     Add(systems.Create<GameViewsFeature>());
