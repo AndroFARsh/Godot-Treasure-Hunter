@@ -1,4 +1,5 @@
 using Code.Gameplay.Character.Configs;
+using Code.Gameplay.Character.Nodes;
 using Entitas;
 using Godot;
 
@@ -39,6 +40,7 @@ namespace Code.Gameplay.Character;
 [Game] public class CeilingHitSensorBackwardFarComponent : IComponent { public RayCast2D Value; }
 
 // Character
+[Game] public class LandAnimator2DComponent : IComponent {  public LandAnimator2D Value; }
 [Game] public class CharacterComponent : IComponent { }
 [Game] public class CharacterConfigComponent : IComponent { public CharacterConfig Value; }
 

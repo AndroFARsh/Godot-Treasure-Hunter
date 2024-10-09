@@ -6,8 +6,9 @@ namespace Code.Common.Extensions
   {
     public static void PlayIfNew(this AnimatedSprite2D sprite2D, StringName animation, float customSpeed = 1f, bool fromEnd = false)
     {
-      if (sprite2D.Animation != animation)
-        sprite2D.Play(animation, customSpeed, fromEnd);
+      if (sprite2D.IsPlaying() && sprite2D.Animation == animation) return;
+      
+      sprite2D.Play(animation, customSpeed, fromEnd);
     }
   }
 }

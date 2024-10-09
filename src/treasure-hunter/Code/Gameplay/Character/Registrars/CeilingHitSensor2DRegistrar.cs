@@ -1,11 +1,10 @@
-using Code.Common.Extensions;
 using Code.Common.View.Registrars;
-using Code.Gameplay.Common;
 using Entitas;
 using Godot;
 
 namespace Code.Gameplay.Character.Registrars;
 
+[GlobalClass]
 public partial class CeilingHitSensor2DRegistrar: EntityNodeRegistrar
 {
   [Export] private RayCast2D _rayCast2DForwardFar;

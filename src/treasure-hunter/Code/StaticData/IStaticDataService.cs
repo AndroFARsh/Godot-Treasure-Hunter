@@ -3,6 +3,7 @@ using Code.Audio.Configs;
 using Code.Common.Curtains.Configs;
 using Code.Gameplay.Cameras.Configs;
 using Code.Gameplay.Character.Configs;
+using Code.Gameplay.CharacterParticleEffects;
 using Code.Infrastructure.UI.Windows;
 using Code.Infrastructure.UI.Windows.Configs;
 using Code.Levels.Configs;
@@ -25,6 +26,8 @@ public interface IStaticDataService
   int NumberOfLevels { get; }
   
   void Initialize();
+  
+  PackedScene GetParticleEffectPrefab(ParticleEffectName name);
   PackedScene GetWindowPrefab(WindowName name);
   LevelConfig GetLevelConfig(int level);
   MusicConfig GetMusicConfig(MusicName name);

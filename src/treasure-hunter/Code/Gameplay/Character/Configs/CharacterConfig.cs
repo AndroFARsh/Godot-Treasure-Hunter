@@ -1,3 +1,4 @@
+using Code.Gameplay.CharacterParticleEffects.Configs;
 using Godot;
 
 namespace Code.Gameplay.Character.Configs;
@@ -5,8 +6,14 @@ namespace Code.Gameplay.Character.Configs;
 [GlobalClass]
 public partial class CharacterConfig : Resource
 {
+  [ExportGroup("Prefabs")] 
   [Export] public PackedScene Prefab;
-
+  [Export] public ParticleEffectConfig[] EffectPrefabs;
+  
+  [ExportGroup("Land Squash Effect")] 
+  [Export(PropertyHint.Range, "0f, 1")] public float LandSquashScaleFactor = 0.4f;
+  [Export] public float LandSquashDuration = 0.1f;
+  
   [ExportGroup("Gravity")]
   // Downwards force (gravity) needed for the desired jumpHeight and jumpTimeToApex.
   public float GravityStrength => 2 * JumpHeight / (JumpTimeToApex * JumpTimeToApex);

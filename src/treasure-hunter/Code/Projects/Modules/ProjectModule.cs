@@ -6,6 +6,7 @@ using Code.Common.View.Factories;
 using Code.Credits.UI.About;
 using Code.Gameplay.Cameras.Factories;
 using Code.Gameplay.Character.Factories;
+using Code.Gameplay.CharacterParticleEffects.Factories;
 using Code.Gameplay.HUD;
 using Code.Gameplay.Windows.MenuWindow;
 using Code.Home.UI.MainMenu;
@@ -167,6 +168,7 @@ namespace Code.Projects.Modules
     private static void BindGameplayFactories(IBindingRoot binder)
     {
       binder.Bind<ICharacterFactory>().To<CharacterFactory>().InSingletonScope();
+      binder.Bind<IParticleEffectFactory>().To<ParticleEffectFactory>().InSingletonScope();
       binder.Bind<ICameraFactory>().To<CameraFactory>().InSingletonScope();
     }
   }
