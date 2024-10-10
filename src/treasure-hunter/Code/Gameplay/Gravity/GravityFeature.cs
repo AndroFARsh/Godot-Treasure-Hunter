@@ -7,7 +7,8 @@ public class GravityFeature : Feature
 {
   public GravityFeature(ISystemFactory systems)
   {
-    Add(systems.Create<ApplyGravitySystem>());
+    Add(systems.Create<ResetGravityOnJustLendSystem>());
+    Add(systems.Create<ApplyGravityInAirSystem>());
     Add(systems.Create<ClampFallSpeedSystem>());
   }
 }

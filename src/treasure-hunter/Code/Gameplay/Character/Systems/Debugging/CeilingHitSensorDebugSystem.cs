@@ -37,7 +37,7 @@ public class CeilingHitSensorDebugSystem : IExecuteSystem, IDebugSystem
   {
     debugger2D.RequestDrawLine(
       from: rayCast2D.GlobalPosition,
-      to: rayCast2D.GlobalPosition + rayCast2D.TargetPosition,
+      to: rayCast2D.GlobalPosition + rayCast2D.GlobalTransform.BasisXform(rayCast2D.TargetPosition),
       color: rayCast2D.IsColliding() ? Colors.Red : Colors.Green,
       width: 1
     );
