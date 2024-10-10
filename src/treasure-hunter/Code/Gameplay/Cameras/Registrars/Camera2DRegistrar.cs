@@ -1,4 +1,3 @@
-using Code.Common.Extensions;
 using Code.Common.View.Registrars;
 using Entitas;
 using Godot;
@@ -6,15 +5,9 @@ using Godot;
 namespace Code.Gameplay.Cameras.Registrars;
 
 [GlobalClass]
-public partial class Camera2DRegistrar : EntityNodeRegistrar
+public partial class Camera2DRegistrar : Camera2D, IEntityNodeRegistrar
 {
-  [Export] private Camera2D _camera2D;
+  public void Register(IEntity entity) => entity.AddComponent(new Camera2DComponent { Value = this });
 
-  public override void Register(IEntity entity)
-  {
-    _camera2D ??= GetParent().FindChildOfType<Camera2D>();
-    if (_camera2D != null) entity.AddComponent(new Camera2DComponent { Value = _camera2D });
-  }
-
-  public override void Unregister(IEntity entity) => entity.TryRemoveComponent<Camera2DComponent>();
+  public void Unregister(IEntity entity) => entity.TryRemoveComponent<Camera2DComponent>();
 }

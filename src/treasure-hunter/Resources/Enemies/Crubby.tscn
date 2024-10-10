@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://db10kehtcy7mh"]
+[gd_scene load_steps=54 format=3 uid="uid://db10kehtcy7mh"]
 
 [ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_rkw7r"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/AnimatedSprite2DRegistrar.cs" id="2_xuewt"]
@@ -7,10 +7,10 @@
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/Node2DRegistrar.cs" id="5_lx32r"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/VisualDebugger2DRegistrar.cs" id="6_cctrj"]
 [ext_resource type="Texture2D" uid="uid://dlbeg6ws13hlk" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 01.png" id="7_7htfr"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/LandAnimator2D.cs" id="7_a08e6"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/LandAnimator2DRegistrar.cs" id="7_lyhda"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/LandEffectAnimator2DRegistrar.cs" id="7_skgt4"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/FacingNode2DRegistrar.cs" id="8_2f0yd"]
 [ext_resource type="Texture2D" uid="uid://dxc1gjto7cy27" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 02.png" id="8_873rp"]
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Registrars/LedgeSensor2DRegistrar.cs" id="9_qcg1u"]
 [ext_resource type="Texture2D" uid="uid://3lnae4j8jrw8" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 03.png" id="9_xeweg"]
 [ext_resource type="Texture2D" uid="uid://dpvgrxbfv7kwa" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 01.png" id="10_0u2jc"]
 [ext_resource type="Texture2D" uid="uid://domjudg504sy7" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 02.png" id="11_n6hby"]
@@ -49,7 +49,8 @@
 [ext_resource type="Texture2D" uid="uid://c1hydu6am3vg4" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 04.png" id="44_6rrd6"]
 [ext_resource type="Texture2D" uid="uid://bu687uskoqr5t" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 05.png" id="45_xn7cs"]
 [ext_resource type="Texture2D" uid="uid://48l7oixfk8g1" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 06.png" id="46_51wck"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/VisualDebugger2D.cs" id="78_gsf08"]
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Registrars/ForwardSensor2DRegistrar.cs" id="50_tgndj"]
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Registrars/JumpHeightSensor2DRegistrar.cs" id="51_60jiu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_25dym"]
 animations = [{
@@ -229,41 +230,22 @@ animations = [{
 [node name="Crubby" type="Node"]
 script = ExtResource("1_rkw7r")
 
-[node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
-script = ExtResource("2_xuewt")
-_animatedSprite2D = NodePath("../CharacterBody2D/FacingNode2D/AnimatedSprite2D")
-
-[node name="CollisionShape2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_collisionShape2D")]
-script = ExtResource("3_o1v1x")
-_collisionShape2D = NodePath("../CharacterBody2D/CollisionShape2D")
-
-[node name="CharacterBody2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_characterBody2D")]
-script = ExtResource("4_7cm77")
-_characterBody2D = NodePath("../CharacterBody2D")
-
 [node name="Node2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node")]
 script = ExtResource("5_lx32r")
 _node = NodePath("../CharacterBody2D")
 
-[node name="VisualDebugger2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_visualDebugger2D")]
-script = ExtResource("6_cctrj")
-_visualDebugger2D = NodePath("../VisualDebugger2D")
-
-[node name="LandAnimator2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_landAnimator2D")]
-script = ExtResource("7_lyhda")
-_landAnimator2D = NodePath("../CharacterBody2D/LandAnimator2D")
-
-[node name="FacingNode2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node2D")]
-script = ExtResource("8_2f0yd")
-_node2D = NodePath("../CharacterBody2D/FacingNode2D")
-
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2147483648
 collision_mask = 30719
+script = ExtResource("4_7cm77")
 
 [node name="FacingNode2D" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("8_2f0yd")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D"]
+[node name="LandEffectNode2D" type="Node2D" parent="CharacterBody2D/FacingNode2D"]
+script = ExtResource("7_skgt4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D/LandEffectNode2D"]
 texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_25dym")
@@ -271,18 +253,28 @@ animation = &"attack"
 frame = 3
 frame_progress = 1.0
 flip_h = true
+script = ExtResource("2_xuewt")
+
+[node name="LedgeSensorRayCast2D" type="RayCast2D" parent="CharacterBody2D/FacingNode2D"]
+position = Vector2(10, 0)
+target_position = Vector2(0, 1)
+script = ExtResource("9_qcg1u")
+
+[node name="ForwardSensorRayCast2D" type="RayCast2D" parent="CharacterBody2D/FacingNode2D"]
+position = Vector2(10, -10)
+exclude_parent = false
+target_position = Vector2(1, 0)
+script = ExtResource("50_tgndj")
+
+[node name="JumpHeightSensorRayCast2D" type="RayCast2D" parent="CharacterBody2D/FacingNode2D"]
+position = Vector2(10, -32)
+target_position = Vector2(1, 0)
+script = ExtResource("51_60jiu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_ryxot")
-
-[node name="LandAnimator2D" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("_node2D")]
-script = ExtResource("7_a08e6")
-_node2D = NodePath("..")
-
-[node name="LandAnimator2D" type="Node" parent="CharacterBody2D/LandAnimator2D" node_paths=PackedStringArray("_node2D")]
-script = ExtResource("7_a08e6")
-_node2D = NodePath("../..")
+script = ExtResource("3_o1v1x")
 
 [node name="VisualDebugger2D" type="Node2D" parent="."]
-script = ExtResource("78_gsf08")
+script = ExtResource("6_cctrj")

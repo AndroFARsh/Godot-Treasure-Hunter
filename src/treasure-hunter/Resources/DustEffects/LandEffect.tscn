@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://83uhg5kiabc3" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Fall 04.png" id="4_llbh0"]
 [ext_resource type="Texture2D" uid="uid://bwrm6est5l16p" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Fall 05.png" id="5_grldc"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/Node2DRegistrar.cs" id="6_gecqw"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/AnimatedSprite2DRegistrar.cs" id="8_itctl"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/FacingNode2DRegistrar.cs" id="9_u7ycs"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/AnimatedSprite2DRegistrar.cs" id="17_qxsrc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0gq32"]
 animations = [{
@@ -37,21 +37,15 @@ animations = [{
 script = ExtResource("1_t346j")
 
 [node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("9_u7ycs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
 visible = false
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_0gq32")
 animation = &"land"
+script = ExtResource("8_itctl")
 
 [node name="Node2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node")]
 script = ExtResource("6_gecqw")
 _node = NodePath("../Node2D")
-
-[node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
-script = ExtResource("17_qxsrc")
-_animatedSprite2D = NodePath("../Node2D/AnimatedSprite2D")
-
-[node name="FacingNode2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node2D")]
-script = ExtResource("9_u7ycs")
-_node2D = NodePath("../Node2D")

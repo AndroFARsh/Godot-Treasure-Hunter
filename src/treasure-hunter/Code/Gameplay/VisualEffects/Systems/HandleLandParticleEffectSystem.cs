@@ -11,9 +11,7 @@ public class HandleLandParticleEffectSystem : IExecuteSystem
   {
     _characterEntities = game.GetGroup(
       GameMatcher.AllOf(
-        GameMatcher.Character,
         GameMatcher.OnFloor,
-        GameMatcher.Facing,
         GameMatcher.PrevFrameInAir)
     );
     
@@ -38,7 +36,8 @@ public class HandleLandParticleEffectSystem : IExecuteSystem
       effect.AnimatedSprite2D.Visible = true;
       effect.AnimatedSprite2D.Play("land");
       
-      effect.ReplaceFacing(character.Facing);
+      if (character.hasFacing)
+        effect.ReplaceFacing(character.Facing);
     }
   }
 }

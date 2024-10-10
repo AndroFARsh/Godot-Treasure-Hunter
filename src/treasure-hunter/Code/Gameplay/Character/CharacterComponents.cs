@@ -1,7 +1,7 @@
 using Code.Gameplay.Character.Configs;
+using Code.Gameplay.Common.Nodes;
 using Entitas;
 using Godot;
-using LandAnimator2D = Code.Gameplay.Common.Nodes.LandAnimator2D;
 
 namespace Code.Gameplay.Character;
 
@@ -22,7 +22,7 @@ namespace Code.Gameplay.Character;
 [Game] public class CeilingHitSensorBackwardFarComponent : IComponent { public RayCast2D Value; }
 
 // Character
-[Game] public class LandAnimator2DComponent : IComponent {  public LandAnimator2D Value; }
+[Game] public class LandEffectAnimator2DComponent : IComponent {  public LandEffectAnimator2D Value; }
 [Game] public class CharacterConfigComponent : IComponent { public CharacterConfig Value; }
 
 

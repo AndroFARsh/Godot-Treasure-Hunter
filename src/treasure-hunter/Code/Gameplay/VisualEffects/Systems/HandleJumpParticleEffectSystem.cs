@@ -19,13 +19,14 @@ public class HandleJumpParticleEffectSystem : ReactiveSystem<GameEntity>
   }
 
   protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>
-    context.CreateCollector(GameMatcher.GroundJumping.Added());
+    context.CreateCollector(GameMatcher.GoingUp.Added());
 
-  protected override bool Filter(GameEntity entity) => 
-    entity.isGroundJumping &&
-    entity.hasNode2D && 
-    entity.hasId && 
-    entity.hasFacing;
+  protected override bool Filter(GameEntity entity) =>
+    entity.isInAir &&
+    entity.isPrevFrameOnFloor &&
+    entity.isGoingUp &&
+    entity.hasNode2D &&
+    entity.hasId;
 
   protected override void Execute(List<GameEntity> characterEntities)
   {
@@ -38,7 +39,8 @@ public class HandleJumpParticleEffectSystem : ReactiveSystem<GameEntity>
       effect.AnimatedSprite2D.Visible = true;
       effect.AnimatedSprite2D.Play("jump");
       
-      effect.ReplaceFacing(character.Facing);
+      if (character.hasFacing)
+        effect.ReplaceFacing(character.Facing);
     }
   }
 }
