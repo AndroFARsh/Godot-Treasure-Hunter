@@ -33,11 +33,15 @@ public class UpdateGravityScaleSystem : IExecuteSystem
           gravityScale = ResolveApexHangGravityScale(entity);
         else if (IsFalling(entity)) 
           gravityScale = entity.CharacterConfig.FallGravityScale;
+        else if (IsGrounded(entity))
+          gravityScale = 0;
       }
 
       entity.ReplaceGravityScale(gravityScale);
     }
   }
+
+  private static bool IsGrounded(GameEntity entity) => entity.isOnFloor;
 
   private static bool IsJustAirJump(GameEntity entity) => entity.isJustAirJump;
 
@@ -50,7 +54,7 @@ public class UpdateGravityScaleSystem : IExecuteSystem
   }
 
   private static bool IsFalling(GameEntity entity) => entity.isFalling;
-
+  
   private static bool ShouldCutJump(InputEntity input, GameEntity entity) =>
     entity.CharacterConfig.JumpCutGravityScaleFeature && 
     !input.isJumpPressed && 

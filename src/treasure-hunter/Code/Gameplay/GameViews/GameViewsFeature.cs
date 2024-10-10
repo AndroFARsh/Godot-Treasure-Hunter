@@ -12,5 +12,6 @@ public sealed class GameViewsFeature : Feature
     Add(systems.Create<MergeVelocitySystem>());
     Add(systems.Create<UpdateViewFacingSystem>());
     Add(systems.Create<UpdateViewVelocitySystem>());
+    Add(systems.Create<UpdateViewWorldPositionSystem>());
   }
 }

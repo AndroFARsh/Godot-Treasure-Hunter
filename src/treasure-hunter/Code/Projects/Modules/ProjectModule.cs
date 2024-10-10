@@ -6,8 +6,9 @@ using Code.Common.View.Factories;
 using Code.Credits.UI.About;
 using Code.Gameplay.Cameras.Factories;
 using Code.Gameplay.Character.Factories;
-using Code.Gameplay.CharacterParticleEffects.Factories;
+using Code.Gameplay.Enemies.Factories;
 using Code.Gameplay.HUD;
+using Code.Gameplay.VisualEffects.Factories;
 using Code.Gameplay.Windows.MenuWindow;
 using Code.Home.UI.MainMenu;
 using Code.Infrastructure.EntityFactories;
@@ -162,13 +163,13 @@ namespace Code.Projects.Modules
     private static void BindGameplayServices(IBindingRoot binder)
     {
       binder.Bind<ILevelDataProvider>().To<LevelDataProvider>().InSingletonScope();
-      // builder.Register<SimpleInputService>(Lifetime.Singleton).As<IInputService>();
     }
     
     private static void BindGameplayFactories(IBindingRoot binder)
     {
       binder.Bind<ICharacterFactory>().To<CharacterFactory>().InSingletonScope();
-      binder.Bind<IParticleEffectFactory>().To<ParticleEffectFactory>().InSingletonScope();
+      binder.Bind<IDustParticleEffectFactory>().To<DustParticleEffectFactory>().InSingletonScope();
+      binder.Bind<IEnemyFactory>().To<EnemyFactory>().InSingletonScope();
       binder.Bind<ICameraFactory>().To<CameraFactory>().InSingletonScope();
     }
   }

@@ -3,7 +3,10 @@ using Code.Audio.Configs;
 using Code.Common.Curtains.Configs;
 using Code.Gameplay.Cameras.Configs;
 using Code.Gameplay.Character.Configs;
-using Code.Gameplay.CharacterParticleEffects;
+using Code.Gameplay.Enemies;
+using Code.Gameplay.Enemies.Configs;
+using Code.Gameplay.VisualEffects;
+using Code.Gameplay.VisualEffects.Configs;
 using Code.Infrastructure.UI.Windows;
 using Code.Infrastructure.UI.Windows.Configs;
 using Code.Levels.Configs;
@@ -23,13 +26,16 @@ public interface IStaticDataService
 
   AudioConfig AudioConfig { get; }
   
+  VisualEffectConfig VisualEffectConfig { get; }
+  
   int NumberOfLevels { get; }
   
   void Initialize();
   
-  PackedScene GetParticleEffectPrefab(ParticleEffectName name);
+  PackedScene GetParticleEffectPrefab(DustParticleEffectName name);
   PackedScene GetWindowPrefab(WindowName name);
   LevelConfig GetLevelConfig(int level);
   MusicConfig GetMusicConfig(MusicName name);
   EffectConfig GetEffectConfig(EffectName name);
+  EnemyConfig GetEnemyConfig(EnemyName name);
 }

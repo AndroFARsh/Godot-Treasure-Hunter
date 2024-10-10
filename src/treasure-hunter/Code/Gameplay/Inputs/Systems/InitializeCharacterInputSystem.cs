@@ -14,6 +14,6 @@ public class InitializeCharacterInputSystem : IInitializeSystem
   }
 
   public void Initialize() => _entityFactory.CreateEntity<InputEntity>()
-    .AddHorizontalDirection(0)
+    .AddLateralDirection(0)
     .With(e => e.isCharacter = true);
 }

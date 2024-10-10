@@ -12,7 +12,7 @@ public class UpdateHorizontalDirectionInputSystem : IExecuteSystem
     _entities = input.GetGroup(
       InputMatcher.AllOf(
         InputMatcher.Character,
-        InputMatcher.HorizontalDirection
+        InputMatcher.LateralDirection
       ));
   }
 
@@ -21,7 +21,7 @@ public class UpdateHorizontalDirectionInputSystem : IExecuteSystem
     foreach (InputEntity entity in _entities)
     {
       float direction = Input.GetAxis("MoveLeft", "MoveRight");
-      entity.ReplaceHorizontalDirection(direction);
+      entity.ReplaceLateralDirection(direction);
     }
   }
 }

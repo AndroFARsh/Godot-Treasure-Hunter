@@ -1,6 +1,6 @@
 using Code.Gameplay.Character.Factories;
-using Code.Gameplay.CharacterParticleEffects;
-using Code.Gameplay.CharacterParticleEffects.Factories;
+using Code.Gameplay.VisualEffects;
+using Code.Gameplay.VisualEffects.Factories;
 using Entitas;
 
 namespace Code.Gameplay.Character.Systems;
@@ -8,19 +8,19 @@ namespace Code.Gameplay.Character.Systems;
 public class InitSystem : IInitializeSystem
 {
   private readonly ICharacterFactory _characterFactory;
-  private readonly IParticleEffectFactory _particleEffectFactory;
+  private readonly IDustParticleEffectFactory _dustParticleEffectFactory;
 
-  public InitSystem(ICharacterFactory characterFactory, IParticleEffectFactory particleEffectFactory)
+  public InitSystem(ICharacterFactory characterFactory, IDustParticleEffectFactory dustParticleEffectFactory)
   {
     _characterFactory = characterFactory;
-    _particleEffectFactory = particleEffectFactory;
+    _dustParticleEffectFactory = dustParticleEffectFactory;
   }
 
   public void Initialize()
   {
     GameEntity character = _characterFactory.Create();
-    _particleEffectFactory.Create(ParticleEffectName.Run, character.Id);
-    _particleEffectFactory.Create(ParticleEffectName.Jump, character.Id);
-    _particleEffectFactory.Create(ParticleEffectName.Land, character.Id);
+    _dustParticleEffectFactory.Create(DustParticleEffectName.Run, character.Id);
+    _dustParticleEffectFactory.Create(DustParticleEffectName.Jump, character.Id);
+    _dustParticleEffectFactory.Create(DustParticleEffectName.Land, character.Id);
   } 
 }

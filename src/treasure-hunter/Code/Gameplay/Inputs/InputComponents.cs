@@ -2,9 +2,9 @@ using Entitas;
 
 namespace Code.Gameplay.Inputs;
 
-[Input] public class CharacterComponent : IComponent { }
+[Game, Input] public class CharacterComponent : IComponent { }
 
-[Input] public class HorizontalDirectionComponent : IComponent { public float Value; }
+[Game, Input] public class LateralDirectionComponent : IComponent { public float Value; }
 
 [Input] public class JumpJustPressedComponent : IComponent { }
 

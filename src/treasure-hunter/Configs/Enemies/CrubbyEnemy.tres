@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=3 format=3 uid="uid://dssrlghr88qar"]
+
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Configs/EnemyConfig.cs" id="1_0vu4o"]
+[ext_resource type="PackedScene" uid="uid://db10kehtcy7mh" path="res://Resources/Enemies/Crubby.tscn" id="1_mbbmh"]
+
+[resource]
+script = ExtResource("1_0vu4o")
+Name = 1
+Prefab = ExtResource("1_mbbmh")
+RunMaxSpeed = 50.0
+JumpHeight = 64.0
+JumpTimeToApex = 0.5
+FallMaxSpeed = 400.0

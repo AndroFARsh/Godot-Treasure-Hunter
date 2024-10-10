@@ -22,11 +22,15 @@ public class CharacterFactory : ICharacterFactory
     CharacterConfig config = _staticDataService.CharacterConfig;
     GameEntity characterEntity = _entityFactory.CreateEntity<GameEntity>()
         .AddViewPrefab(config.Prefab)
-        .AddFacingFlip(false)
+        .AddFacing(1)
         .AddCharacterConfig(config)
+        .With(e => e.isApplyGravity = true)
+        .AddGravityStrength(config.GravityStrength)
         .AddGravityScale(1)
+        .AddFallMaxSpeed(config.FallMaxSpeed)
         .AddAirVelocity(0)
         .AddLateralVelocity(0)
+        .AddLateralMaxSpeed(config.RunMaxSpeed)
         .AddVelocity(Vector2.Zero)
         .With(e => e.isCharacter = true)
       ;
