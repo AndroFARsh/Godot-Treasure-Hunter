@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://db10kehtcy7mh"]
+[gd_scene load_steps=56 format=3 uid="uid://db10kehtcy7mh"]
 
 [ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_rkw7r"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/AnimatedSprite2DRegistrar.cs" id="2_xuewt"]
@@ -11,9 +11,12 @@
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/LandAnimator2DRegistrar.cs" id="7_lyhda"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/FacingNode2DRegistrar.cs" id="8_2f0yd"]
 [ext_resource type="Texture2D" uid="uid://dxc1gjto7cy27" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 02.png" id="8_873rp"]
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Registrars/LedgeSensor2DRegistrar.cs" id="9_qcg1u"]
 [ext_resource type="Texture2D" uid="uid://3lnae4j8jrw8" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 03.png" id="9_xeweg"]
 [ext_resource type="Texture2D" uid="uid://dpvgrxbfv7kwa" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 01.png" id="10_0u2jc"]
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Registrars/WallSensor2DRegistrar.cs" id="10_vglw8"]
 [ext_resource type="Texture2D" uid="uid://domjudg504sy7" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 02.png" id="11_n6hby"]
+[ext_resource type="Script" path="res://Code/Gameplay/Enemies/Registrars/JumpSensor2DRegistrar.cs" id="11_unsh0"]
 [ext_resource type="Texture2D" uid="uid://c834b7ouw3a6r" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 03.png" id="12_0p37i"]
 [ext_resource type="Texture2D" uid="uid://dooirk2tbhuuw" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 04.png" id="13_3uh3g"]
 [ext_resource type="Texture2D" uid="uid://b2pmwcku44srd" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/10-Dead Ground/Dead Ground 01.png" id="14_jiyl4"]
@@ -231,7 +234,7 @@ script = ExtResource("1_rkw7r")
 
 [node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
 script = ExtResource("2_xuewt")
-_animatedSprite2D = NodePath("../CharacterBody2D/FacingNode2D/AnimatedSprite2D")
+_animatedSprite2D = NodePath("../CharacterBody2D/FacingNode2D/LandEffectNode2D/AnimatedSprite2D")
 
 [node name="CollisionShape2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_collisionShape2D")]
 script = ExtResource("3_o1v1x")
@@ -257,13 +260,27 @@ _landAnimator2D = NodePath("../CharacterBody2D/LandAnimator2D")
 script = ExtResource("8_2f0yd")
 _node2D = NodePath("../CharacterBody2D/FacingNode2D")
 
+[node name="LedgeSensor2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_reyCast")]
+script = ExtResource("9_qcg1u")
+_reyCast = NodePath("../CharacterBody2D/FacingNode2D/LedgeRayCast2D")
+
+[node name="WallSensor2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_reyCast")]
+script = ExtResource("10_vglw8")
+_reyCast = NodePath("../CharacterBody2D/FacingNode2D/FrontRayCast2D")
+
+[node name="JumpSensor2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_reyCast")]
+script = ExtResource("11_unsh0")
+_reyCast = NodePath("../CharacterBody2D/FacingNode2D/JumpHeightRayCast2D")
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2147483648
 collision_mask = 30719
 
 [node name="FacingNode2D" type="Node2D" parent="CharacterBody2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D"]
+[node name="LandEffectNode2D" type="Node2D" parent="CharacterBody2D/FacingNode2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D/LandEffectNode2D"]
 texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_25dym")
@@ -272,17 +289,26 @@ frame = 3
 frame_progress = 1.0
 flip_h = true
 
+[node name="LedgeRayCast2D" type="RayCast2D" parent="CharacterBody2D/FacingNode2D"]
+position = Vector2(10, 0)
+target_position = Vector2(0, 1)
+
+[node name="FrontRayCast2D" type="RayCast2D" parent="CharacterBody2D/FacingNode2D"]
+position = Vector2(10, -10)
+exclude_parent = false
+target_position = Vector2(1, 0)
+
+[node name="JumpHeightRayCast2D" type="RayCast2D" parent="CharacterBody2D/FacingNode2D"]
+position = Vector2(10, -32)
+target_position = Vector2(1, 0)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_ryxot")
 
 [node name="LandAnimator2D" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("_node2D")]
 script = ExtResource("7_a08e6")
-_node2D = NodePath("..")
-
-[node name="LandAnimator2D" type="Node" parent="CharacterBody2D/LandAnimator2D" node_paths=PackedStringArray("_node2D")]
-script = ExtResource("7_a08e6")
-_node2D = NodePath("../..")
+_node2D = NodePath("../FacingNode2D/LandEffectNode2D")
 
 [node name="VisualDebugger2D" type="Node2D" parent="."]
 script = ExtResource("78_gsf08")

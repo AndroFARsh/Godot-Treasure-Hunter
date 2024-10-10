@@ -24,5 +24,5 @@ Prefab = ExtResource("4_tngd3")
 [resource]
 script = ExtResource("1_e2pf6")
 DustEffectPrefabs = Array[Object]([SubResource("Resource_s2ndq"), SubResource("Resource_lfpnl"), SubResource("Resource_bptan")])
-LandSquashScaleFactor = 0.4
+LandSquashScaleFactor = 0.5
 LandSquashDuration = 0.1
