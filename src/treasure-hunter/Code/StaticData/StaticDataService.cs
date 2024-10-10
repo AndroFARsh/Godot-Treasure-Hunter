@@ -7,7 +7,10 @@ using Code.Common.Curtains.Configs;
 using Code.Common.Extensions;
 using Code.Gameplay.Cameras.Configs;
 using Code.Gameplay.Character.Configs;
-using Code.Gameplay.CharacterParticleEffects;
+using Code.Gameplay.Enemies;
+using Code.Gameplay.Enemies.Configs;
+using Code.Gameplay.VisualEffects;
+using Code.Gameplay.VisualEffects.Configs;
 using Code.Infrastructure.ResourceManagement;
 using Code.Infrastructure.UI.Windows;
 using Code.Infrastructure.UI.Windows.Configs;
@@ -22,7 +25,8 @@ public class StaticDataService : IStaticDataService, IDisposable
   private readonly Dictionary<WindowName, PackedScene> _windows = new();
   private readonly Dictionary<EffectName, EffectConfig> _effects = new();
   private readonly Dictionary<MusicName, MusicConfig> _musics = new();
-  private readonly Dictionary<ParticleEffectName, PackedScene> _particleEffects = new();
+  private readonly Dictionary<DustParticleEffectName, PackedScene> _particleEffects = new();
+  private readonly Dictionary<EnemyName, EnemyConfig> _enemies = new();
   private readonly List<LevelConfig> _levels = new();
 
   public CameraConfig CameraConfig { get; private set; }
@@ -30,6 +34,7 @@ public class StaticDataService : IStaticDataService, IDisposable
   public AudioConfig AudioConfig { get; private set; }
   public CurtainConfig CurtainConfig { get; private set; }
   public WindowConfig WindowConfig { get; private set; }
+  public VisualEffectConfig VisualEffectConfig { get; private set; }
 
   public int NumberOfLevels => _levels.Count;
 
@@ -46,14 +51,16 @@ public class StaticDataService : IStaticDataService, IDisposable
     LoadAudioConfig();
     LoadCharacterConfig();
     LoadCameraConfig();
+    LoadEnemiesConfig();
+    LoadVisualEffectConfig();
   }
-  
-  public PackedScene GetParticleEffectPrefab(ParticleEffectName name) => _particleEffects[name];
+
+  public PackedScene GetParticleEffectPrefab(DustParticleEffectName name) => _particleEffects[name];
   public PackedScene GetWindowPrefab(WindowName name) => _windows[name];
   public LevelConfig GetLevelConfig(int level) => _levels[level];
   public MusicConfig GetMusicConfig(MusicName name) => _musics[name];
   public EffectConfig GetEffectConfig(EffectName name) => _effects[name];
-
+  public EnemyConfig GetEnemyConfig(EnemyName name) => _enemies[name];
   
   private void LoadAudioConfig() =>
     AudioConfig = _resourcesProvider.Load<AudioConfig>("res://Configs/Audio/AudioConfig.tres")
@@ -69,14 +76,20 @@ public class StaticDataService : IStaticDataService, IDisposable
   private void LoadWindowsConfig() =>
     WindowConfig = _resourcesProvider.Load<WindowConfig>("res://Configs/Windows/WindowsConfig.tres")
       .With(config => _windows.AddRange(config.Prefabs.ToDictionary(c => c.Name, c => c.Prefab)));
-  
+
   private void LoadCharacterConfig() =>
-    CharacterConfig = _resourcesProvider.Load<CharacterConfig>("res://Configs/Characters/CharacterConfig.tres")
-      .With(config => _particleEffects.AddRange(config.EffectPrefabs.ToDictionary(c => c.Name, c => c.Prefab)));
+    CharacterConfig = _resourcesProvider.Load<CharacterConfig>("res://Configs/Characters/CharacterConfig.tres");
   
   private void LoadCameraConfig() =>
     CameraConfig = _resourcesProvider.Load<CameraConfig>("res://Configs/Cameras/CameraConfig.tres");
 
+  private void LoadEnemiesConfig() => 
+    _enemies.AddRange(_resourcesProvider.LoadAll<EnemyConfig>("res://Configs/Enemies").ToDictionary(c => c.Name));
+  
+  private void LoadVisualEffectConfig() =>
+    VisualEffectConfig = _resourcesProvider.Load<VisualEffectConfig>("res://Configs/VisualEffects/VisualEffectConfig.tres")
+      .With(config => _particleEffects.AddRange(config.DustEffectPrefabs.ToDictionary(c => c.Name, c => c.Prefab)));
+  
   void IDisposable.Dispose()
   {
     CharacterConfig = null;
@@ -84,6 +97,7 @@ public class StaticDataService : IStaticDataService, IDisposable
     CameraConfig = null;
     WindowConfig = null;
     AudioConfig = null;
+    VisualEffectConfig = null;
     
     _particleEffects.Clear();
     _windows.Clear();

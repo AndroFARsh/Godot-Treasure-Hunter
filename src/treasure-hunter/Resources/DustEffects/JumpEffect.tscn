@@ -1,0 +1,61 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvh2ohr8shh02"]
+
+[ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_jrms0"]
+[ext_resource type="Texture2D" uid="uid://cv7b74eo7eb18" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Jump 01.png" id="6_oe8ju"]
+[ext_resource type="Texture2D" uid="uid://dgwav7lm3tr5o" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Jump 02.png" id="7_1d322"]
+[ext_resource type="Texture2D" uid="uid://cu5u5p78vfmj6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Jump 03.png" id="8_2txoc"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/Node2DRegistrar.cs" id="8_kppqr"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/FacingNode2DRegistrar.cs" id="8_qcsm4"]
+[ext_resource type="Texture2D" uid="uid://dkm3j73jhamqv" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Jump 04.png" id="9_gotjn"]
+[ext_resource type="Texture2D" uid="uid://5ottijtt42r0" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Jump 05.png" id="10_d3556"]
+[ext_resource type="Texture2D" uid="uid://cr5essa8da3sl" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Dust Particles/Jump 06.png" id="11_4glek"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/AnimatedSprite2DRegistrar.cs" id="17_krcbr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0gq32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_oe8ju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1d322")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2txoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gotjn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d3556")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_4glek")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}]
+
+[node name="JumpEffect" type="Node"]
+script = ExtResource("1_jrms0")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+visible = false
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_0gq32")
+animation = &"jump"
+
+[node name="FacingNode2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node2D")]
+script = ExtResource("8_qcsm4")
+_node2D = NodePath("../Node2D")
+
+[node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
+script = ExtResource("17_krcbr")
+_animatedSprite2D = NodePath("../Node2D/AnimatedSprite2D")
+
+[node name="Node2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node")]
+script = ExtResource("8_kppqr")
+_node = NodePath("../Node2D")

@@ -10,12 +10,16 @@ public class UpdateViewFacingSystem : IExecuteSystem
   public UpdateViewFacingSystem(GameContext game)
   {
     _entities = game.GetGroup(GameMatcher
-      .AllOf(GameMatcher.FacingFlip, GameMatcher.AnimatedSprite2D));
+      .AllOf(GameMatcher.Facing, GameMatcher.FacingNode2D));
   }
 
   public void Execute()
   {
     foreach (GameEntity entity in _entities)
-      entity.AnimatedSprite2D.FlipH = entity.FacingFlip;
+    {
+      Vector2 scale = entity.FacingNode2D.Scale;
+      scale.X = entity.Facing;
+      entity.FacingNode2D.Scale = scale;
+    }
   }
 }

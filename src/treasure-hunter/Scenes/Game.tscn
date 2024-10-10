@@ -769,7 +769,7 @@ tile_set = SubResource("TileSet_sbnch")
 rendering_quadrant_size = 32
 
 [node name="GoldCoin" parent="GameRoot" instance=ExtResource("5_xxkah")]
-position = Vector2(0, -10)
+position = Vector2(-102, -10)
 
 [node name="AnimatableBody2D" parent="GameRoot" instance=ExtResource("5_klajr")]
 position = Vector2(-191, 3)

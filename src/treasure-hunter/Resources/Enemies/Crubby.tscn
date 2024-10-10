@@ -1,0 +1,288 @@
+[gd_scene load_steps=53 format=3 uid="uid://db10kehtcy7mh"]
+
+[ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_rkw7r"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/AnimatedSprite2DRegistrar.cs" id="2_xuewt"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/CollisionShape2DRegistrar.cs" id="3_o1v1x"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/CharacterBody2DRegistrar.cs" id="4_7cm77"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/Node2DRegistrar.cs" id="5_lx32r"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/VisualDebugger2DRegistrar.cs" id="6_cctrj"]
+[ext_resource type="Texture2D" uid="uid://dlbeg6ws13hlk" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 01.png" id="7_7htfr"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/LandAnimator2D.cs" id="7_a08e6"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/LandAnimator2DRegistrar.cs" id="7_lyhda"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/FacingNode2DRegistrar.cs" id="8_2f0yd"]
+[ext_resource type="Texture2D" uid="uid://dxc1gjto7cy27" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 02.png" id="8_873rp"]
+[ext_resource type="Texture2D" uid="uid://3lnae4j8jrw8" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/06-Anticipation/Anticipation 03.png" id="9_xeweg"]
+[ext_resource type="Texture2D" uid="uid://dpvgrxbfv7kwa" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 01.png" id="10_0u2jc"]
+[ext_resource type="Texture2D" uid="uid://domjudg504sy7" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 02.png" id="11_n6hby"]
+[ext_resource type="Texture2D" uid="uid://c834b7ouw3a6r" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 03.png" id="12_0p37i"]
+[ext_resource type="Texture2D" uid="uid://dooirk2tbhuuw" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/07-Attack/Attack 04.png" id="13_3uh3g"]
+[ext_resource type="Texture2D" uid="uid://b2pmwcku44srd" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/10-Dead Ground/Dead Ground 01.png" id="14_jiyl4"]
+[ext_resource type="Texture2D" uid="uid://b5csbtqcjgtij" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/10-Dead Ground/Dead Ground 02.png" id="15_ehiq1"]
+[ext_resource type="Texture2D" uid="uid://pw0v1fgekh7i" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/10-Dead Ground/Dead Ground 03.png" id="16_nivj8"]
+[ext_resource type="Texture2D" uid="uid://cqs3j1epy5smb" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/10-Dead Ground/Dead Ground 04.png" id="17_h003b"]
+[ext_resource type="Texture2D" uid="uid://iikrtge1pism" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/09-Dead Hit/Dead Hit 01.png" id="18_6oxgl"]
+[ext_resource type="Texture2D" uid="uid://r8no14p5kjbr" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/09-Dead Hit/Dead Hit 02.png" id="19_rmmbu"]
+[ext_resource type="Texture2D" uid="uid://bexdgu4tons3c" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/09-Dead Hit/Dead Hit 03.png" id="20_860j2"]
+[ext_resource type="Texture2D" uid="uid://bay4ulr42mouv" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/09-Dead Hit/Dead Hit 04.png" id="21_l8rfm"]
+[ext_resource type="Texture2D" uid="uid://tu37fil10ipq" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/04-Fall/Fall 01.png" id="22_lpw24"]
+[ext_resource type="Texture2D" uid="uid://81plemfjcx27" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/05-Ground/Ground 01.png" id="23_oub0k"]
+[ext_resource type="Texture2D" uid="uid://d083yxj0sle1y" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/05-Ground/Ground 02.png" id="24_4jlil"]
+[ext_resource type="Texture2D" uid="uid://d1houumxaypev" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/08-Hit/Hit 01.png" id="25_wy6ye"]
+[ext_resource type="Texture2D" uid="uid://cmaq1gp1b35nd" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/08-Hit/Hit 02.png" id="26_ww1ng"]
+[ext_resource type="Texture2D" uid="uid://b6p8xnbcrgc8" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/08-Hit/Hit 03.png" id="27_imabr"]
+[ext_resource type="Texture2D" uid="uid://bdugxam08710i" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/08-Hit/Hit 04.png" id="28_sg36f"]
+[ext_resource type="Texture2D" uid="uid://dq4jxcx5i0q6x" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 01.png" id="29_n81xv"]
+[ext_resource type="Texture2D" uid="uid://cij160kbduajh" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 02.png" id="30_fk874"]
+[ext_resource type="Texture2D" uid="uid://ea7joa2y8ycl" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 03.png" id="31_kv0sf"]
+[ext_resource type="Texture2D" uid="uid://bkbd3hnf7cntf" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 04.png" id="32_amhsm"]
+[ext_resource type="Texture2D" uid="uid://cji1jt7wt5lne" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 05.png" id="33_bq0lx"]
+[ext_resource type="Texture2D" uid="uid://bvb4ksign4clk" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 06.png" id="34_7npt1"]
+[ext_resource type="Texture2D" uid="uid://dg8rhb6i73ig8" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 07.png" id="35_orwt1"]
+[ext_resource type="Texture2D" uid="uid://bd3f63dluy0mq" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 08.png" id="36_cyeg8"]
+[ext_resource type="Texture2D" uid="uid://bvx3ka5epl0lv" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/01-Idle/Idle 09.png" id="37_e0w17"]
+[ext_resource type="Texture2D" uid="uid://cy21g5q8m50xc" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/03-Jump/Jump 01.png" id="38_sktpa"]
+[ext_resource type="Texture2D" uid="uid://de4ur5eiaafjq" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/03-Jump/Jump 02.png" id="39_7e6er"]
+[ext_resource type="Texture2D" uid="uid://bvrmax06jhscy" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/03-Jump/Jump 03.png" id="40_gakfr"]
+[ext_resource type="Texture2D" uid="uid://bjmg687m11uo1" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 01.png" id="41_4wntu"]
+[ext_resource type="Texture2D" uid="uid://cwteiud4nlexp" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 02.png" id="42_nwou5"]
+[ext_resource type="Texture2D" uid="uid://ca0t4afch0s8s" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 03.png" id="43_a6nvt"]
+[ext_resource type="Texture2D" uid="uid://c1hydu6am3vg4" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 04.png" id="44_6rrd6"]
+[ext_resource type="Texture2D" uid="uid://bu687uskoqr5t" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 05.png" id="45_xn7cs"]
+[ext_resource type="Texture2D" uid="uid://48l7oixfk8g1" path="res://Resources/Treasure Hunter/The Crusty Crew/Sprites/Crabby/02-Run/Run 06.png" id="46_51wck"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/VisualDebugger2D.cs" id="78_gsf08"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_25dym"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7htfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_873rp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xeweg")
+}],
+"loop": false,
+"name": &"anticipation",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0u2jc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_n6hby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0p37i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_3uh3g")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_jiyl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ehiq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_nivj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_h003b")
+}],
+"loop": false,
+"name": &"dead_ground",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_6oxgl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_rmmbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_860j2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_l8rfm")
+}],
+"loop": false,
+"name": &"dead_hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_lpw24")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_oub0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_4jlil")
+}],
+"loop": false,
+"name": &"ground",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_wy6ye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ww1ng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_imabr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_sg36f")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_n81xv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_fk874")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_kv0sf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_amhsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_bq0lx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_7npt1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_orwt1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_cyeg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_e0w17")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_sktpa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_7e6er")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_gakfr")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_4wntu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_nwou5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_a6nvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_6rrd6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_xn7cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_51wck")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ryxot"]
+
+[node name="Crubby" type="Node"]
+script = ExtResource("1_rkw7r")
+
+[node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
+script = ExtResource("2_xuewt")
+_animatedSprite2D = NodePath("../CharacterBody2D/FacingNode2D/AnimatedSprite2D")
+
+[node name="CollisionShape2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_collisionShape2D")]
+script = ExtResource("3_o1v1x")
+_collisionShape2D = NodePath("../CharacterBody2D/CollisionShape2D")
+
+[node name="CharacterBody2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_characterBody2D")]
+script = ExtResource("4_7cm77")
+_characterBody2D = NodePath("../CharacterBody2D")
+
+[node name="Node2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node")]
+script = ExtResource("5_lx32r")
+_node = NodePath("../CharacterBody2D")
+
+[node name="VisualDebugger2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_visualDebugger2D")]
+script = ExtResource("6_cctrj")
+_visualDebugger2D = NodePath("../VisualDebugger2D")
+
+[node name="LandAnimator2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_landAnimator2D")]
+script = ExtResource("7_lyhda")
+_landAnimator2D = NodePath("../CharacterBody2D/LandAnimator2D")
+
+[node name="FacingNode2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node2D")]
+script = ExtResource("8_2f0yd")
+_node2D = NodePath("../CharacterBody2D/FacingNode2D")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 30719
+
+[node name="FacingNode2D" type="Node2D" parent="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D"]
+texture_filter = 1
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_25dym")
+animation = &"attack"
+frame = 3
+frame_progress = 1.0
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_ryxot")
+
+[node name="LandAnimator2D" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("_node2D")]
+script = ExtResource("7_a08e6")
+_node2D = NodePath("..")
+
+[node name="LandAnimator2D" type="Node" parent="CharacterBody2D/LandAnimator2D" node_paths=PackedStringArray("_node2D")]
+script = ExtResource("7_a08e6")
+_node2D = NodePath("../..")
+
+[node name="VisualDebugger2D" type="Node2D" parent="."]
+script = ExtResource("78_gsf08")
