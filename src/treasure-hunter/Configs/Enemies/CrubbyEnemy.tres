@@ -7,7 +7,9 @@
 script = ExtResource("1_0vu4o")
 Name = 1
 Prefab = ExtResource("1_mbbmh")
-RunMaxSpeed = 50.0
-JumpHeight = 64.0
-JumpTimeToApex = 0.5
 FallMaxSpeed = 400.0
+JumpHeight = 32.0
+JumpTimeToApex = 0.25
+RunMaxSpeed = 20.0
+RunAcceleration = 10.0
+RunDeceleration = 10.0

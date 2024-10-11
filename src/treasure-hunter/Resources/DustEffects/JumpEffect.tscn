@@ -41,20 +41,14 @@ animations = [{
 script = ExtResource("1_jrms0")
 
 [node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("8_qcsm4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
 visible = false
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_0gq32")
 animation = &"jump"
-
-[node name="FacingNode2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node2D")]
-script = ExtResource("8_qcsm4")
-_node2D = NodePath("../Node2D")
-
-[node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
 script = ExtResource("17_krcbr")
-_animatedSprite2D = NodePath("../Node2D/AnimatedSprite2D")
 
 [node name="Node2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node")]
 script = ExtResource("8_kppqr")

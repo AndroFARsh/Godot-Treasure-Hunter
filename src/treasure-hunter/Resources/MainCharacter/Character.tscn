@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://b6h8mmptwl2fj"]
+[gd_scene load_steps=80 format=3 uid="uid://b6h8mmptwl2fj"]
 
 [ext_resource type="Texture2D" uid="uid://c7u1jqbo1vgks" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/18-Air Attack 1/Air Attack 1 01.png" id="1_gnjgj"]
 [ext_resource type="Script" path="res://Code/Common/View/EntityViewNode.cs" id="1_t7cfp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dhkw0cv8oc7li" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/18-Air Attack 1/Air Attack 1 03.png" id="3_auhu3"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/CollisionShape2DRegistrar.cs" id="3_yuld5"]
 [ext_resource type="Texture2D" uid="uid://payqas13spwb" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 01.png" id="4_7yuoq"]
+[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/LandEffectAnimator2DRegistrar.cs" id="4_yoca6"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/Node2DRegistrar.cs" id="5_h52ov"]
 [ext_resource type="Texture2D" uid="uid://dq0qbcsaomgq6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 02.png" id="5_rccrp"]
 [ext_resource type="Texture2D" uid="uid://4hkghlcdby1r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/19-Air Attack 2/Air Attack 2 03.png" id="6_al0vp"]
@@ -15,7 +16,6 @@
 [ext_resource type="Script" path="res://Code/Gameplay/Character/Registrars/CeilingHitSensor2DRegistrar.cs" id="7_clo5p"]
 [ext_resource type="Texture2D" uid="uid://b3w7sqyrdwxot" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 01.png" id="7_fj52s"]
 [ext_resource type="Texture2D" uid="uid://0s4freg8rjc4" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 02.png" id="8_3wmql"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/LandAnimator2DRegistrar.cs" id="8_ibh4o"]
 [ext_resource type="Script" path="res://Code/Gameplay/Common/Registrars/FacingNode2DRegistrar.cs" id="9_ichnr"]
 [ext_resource type="Texture2D" uid="uid://cs3dwc7pkyi3r" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/15-Attack 1/Attack 1 03.png" id="9_jflw6"]
 [ext_resource type="Texture2D" uid="uid://b2j4r84jcbruf" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/16-Attack 2/Attack 2 01.png" id="10_tx7da"]
@@ -77,8 +77,6 @@
 [ext_resource type="Texture2D" uid="uid://diotvbs0063ep" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 01.png" id="52_vrvso"]
 [ext_resource type="Texture2D" uid="uid://dd0r56avotda6" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 02.png" id="53_cgycf"]
 [ext_resource type="Texture2D" uid="uid://bxfrpicdcb7ch" path="res://Resources/Treasure Hunter/Captain Clown Nose/Sprites/Captain Clown Nose/Captain Clown Nose with Sword/20-Throw Sword/Throw Sword 03.png" id="54_onqkl"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/VisualDebugger2D.cs" id="75_eb2wo"]
-[ext_resource type="Script" path="res://Code/Gameplay/Common/Nodes/LandAnimator2D.cs" id="77_wptf8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7v1ek"]
 animations = [{
@@ -393,61 +391,42 @@ radius = 8.0
 [node name="Character" type="Node"]
 script = ExtResource("1_t7cfp")
 
-[node name="AnimatedSprite2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_animatedSprite2D")]
-script = ExtResource("2_qcq8p")
-_animatedSprite2D = NodePath("../CharacterBody2D/FacingNode2D/AnimatedSprite2D")
-
-[node name="CollisionShape2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_collisionShape2D")]
-script = ExtResource("3_yuld5")
-_collisionShape2D = NodePath("../CharacterBody2D/CollisionShape2D")
-
-[node name="CharacterBody2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_characterBody2D")]
-script = ExtResource("2_1gscp")
-_characterBody2D = NodePath("../CharacterBody2D")
-
 [node name="Node2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node")]
 script = ExtResource("5_h52ov")
 _node = NodePath("../CharacterBody2D")
 
-[node name="VisualDebugger2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_visualDebugger2D")]
-script = ExtResource("6_i6far")
-_visualDebugger2D = NodePath("../VisualDebugger2D")
-
-[node name="CeilingHitSensor2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_rayCast2DForwardFar", "_rayCast2DForward", "_rayCast2DBackward", "_rayCast2DBackwardFar")]
-script = ExtResource("7_clo5p")
-_rayCast2DForwardFar = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DForwardFar")
-_rayCast2DForward = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DForward")
-_rayCast2DBackward = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DBackward")
-_rayCast2DBackwardFar = NodePath("../CharacterBody2D/CeilingHitSensor2D/RayCast2DBackwardFar")
-
-[node name="LandAnimator2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_landAnimator2D")]
-script = ExtResource("8_ibh4o")
-_landAnimator2D = NodePath("../CharacterBody2D/LandAnimator2D")
-
-[node name="FacingNode2DRegistrar" type="Node" parent="." node_paths=PackedStringArray("_node2D")]
-script = ExtResource("9_ichnr")
-_node2D = NodePath("../CharacterBody2D/FacingNode2D")
-
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2147483648
 collision_mask = 30719
+script = ExtResource("2_1gscp")
 
 [node name="FacingNode2D" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("9_ichnr")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D"]
+[node name="LandEffectAnimator2D" type="Node2D" parent="CharacterBody2D/FacingNode2D"]
+script = ExtResource("4_yoca6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/FacingNode2D/LandEffectAnimator2D"]
 texture_filter = 1
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_7v1ek")
 animation = &"run"
 autoplay = "idle"
 frame_progress = 0.617836
+script = ExtResource("2_qcq8p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_ryxot")
+script = ExtResource("3_yuld5")
 
-[node name="CeilingHitSensor2D" type="Node2D" parent="CharacterBody2D"]
+[node name="CeilingHitSensor2D" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("_rayCast2DForwardFar", "_rayCast2DForward", "_rayCast2DBackward", "_rayCast2DBackwardFar")]
 position = Vector2(0, -10)
+script = ExtResource("7_clo5p")
+_rayCast2DForwardFar = NodePath("RayCast2DForwardFar")
+_rayCast2DForward = NodePath("RayCast2DForward")
+_rayCast2DBackward = NodePath("RayCast2DBackward")
+_rayCast2DBackwardFar = NodePath("RayCast2DBackwardFar")
 
 [node name="RayCast2DForwardFar" type="RayCast2D" parent="CharacterBody2D/CeilingHitSensor2D"]
 position = Vector2(10, 0)
@@ -469,9 +448,5 @@ position = Vector2(-10, 0)
 target_position = Vector2(0, -20)
 collision_mask = 255
 
-[node name="LandAnimator2D" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("_node2D")]
-script = ExtResource("77_wptf8")
-_node2D = NodePath("..")
-
 [node name="VisualDebugger2D" type="Node2D" parent="."]
-script = ExtResource("75_eb2wo")
+script = ExtResource("6_i6far")

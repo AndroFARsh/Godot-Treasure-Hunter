@@ -3,19 +3,20 @@ using Entitas;
 
 namespace Code.Gameplay.Gravity.Systems;
 
-public class ApplyGravitySystem : IExecuteSystem
+public class ApplyGravityInAirSystem : IExecuteSystem
 {
   private readonly ITimeService _timeService;
   private readonly IGroup<GameEntity> _entities;
 
-  public ApplyGravitySystem(GameContext game, ITimeService timeService)
+  public ApplyGravityInAirSystem(GameContext game, ITimeService timeService)
   {
     _timeService = timeService;
     _entities = game.GetGroup(GameMatcher.AllOf(
-     // GameMatcher.ApplyGravity,
+      GameMatcher.ApplyGravity,
       GameMatcher.GravityStrength,
       GameMatcher.GravityScale,
-      GameMatcher.AirVelocity
+      GameMatcher.AirVelocity,
+      GameMatcher.InAir
     ));
   }
 

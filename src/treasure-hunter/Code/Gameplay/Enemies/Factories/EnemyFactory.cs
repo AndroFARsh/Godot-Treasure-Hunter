@@ -20,20 +20,36 @@ public class EnemyFactory : IEnemyFactory
   public GameEntity Create(EnemyName name, Vector2 at)
   {
     EnemyConfig config = _staticDataService.GetEnemyConfig(name);
-    return _entityFactory.CreateEntity<GameEntity>()
+    GameEntity enemyEntity = _entityFactory.CreateEntity<GameEntity>()
         .With(e => e.isEnemy = true)
         .AddEnemyName(name)
         .AddViewPrefab(config.Prefab)
         .AddWorldPosition2D(at)
-        .With(e => e.isApplyGravity = true)
-        .AddGravityStrength(config.GravityStrength)
-        .AddGravityScale(1)
-        .AddFallMaxSpeed(config.FallMaxSpeed)
-        .AddAirVelocity(0)
-        .AddLateralVelocity(0)
-        .AddLateralMaxSpeed(config.RunMaxSpeed)
-        .AddLateralDirection(-1)
-        .AddFacing(1)
+        .AddEnemyConfig(config)
       ;
+
+    switch (name)
+    {
+      case EnemyName.Crubby:
+        enemyEntity
+          .With(e => e.isApplyGravity = true)
+          .AddGravityStrength(config.GravityStrength)
+          .AddGravityScale(1)
+          .AddFallMaxSpeed(config.FallMaxSpeed)
+          .AddAirVelocity(0)
+          .With(e => e.isTurnOnLedgeReach = true)
+          .With(e => e.isTurnOnWallReach = true)
+          .With(e => e.isJumpOnLedgeIfReach = true)
+          .AddJumpVelocity(config.JumpVelocity)
+          .AddLateralVelocity(0)
+          .AddLateralMaxSpeed(config.RunMaxSpeed)
+          .AddAcceleration(config.RunAcceleration)
+          .AddDeceleration(config.RunDeceleration)
+          .AddLateralDirection(1)
+          .AddFacing(1);
+        break;
+    }
+    
+    return enemyEntity;
   }
 }

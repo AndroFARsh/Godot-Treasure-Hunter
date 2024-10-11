@@ -13,7 +13,7 @@ public class HandleJustLandedSquashEffectSystem : IExecuteSystem
     _staticDataService = staticDataService;
     _entities = game.GetGroup(
       GameMatcher.AllOf(
-        GameMatcher.LandAnimator2D,
+        GameMatcher.LandEffectAnimator2D,
         GameMatcher.OnFloor,
         GameMatcher.PrevFrameInAir)
     );
@@ -23,7 +23,7 @@ public class HandleJustLandedSquashEffectSystem : IExecuteSystem
   {
     foreach (GameEntity entity in _entities)
     {
-      entity.LandAnimator2D.Play(
+      entity.LandEffectAnimator2D.Play(
         _staticDataService.VisualEffectConfig.LandSquashScaleFactor, 
         _staticDataService.VisualEffectConfig.LandSquashDuration
       );

@@ -21,5 +21,7 @@ public class InitSystem : IInitializeSystem
   {
     GameEntity enemyEntity = _enemyFactory.Create(EnemyName.Crubby, new Vector2(182, -10));
     _dustParticleEffectFactory.Create(DustParticleEffectName.Run, enemyEntity.Id);
+    _dustParticleEffectFactory.Create(DustParticleEffectName.Jump, enemyEntity.Id);
+    _dustParticleEffectFactory.Create(DustParticleEffectName.Land, enemyEntity.Id);
   }
 }

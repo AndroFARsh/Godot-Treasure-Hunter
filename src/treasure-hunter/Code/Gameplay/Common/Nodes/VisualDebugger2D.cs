@@ -4,9 +4,9 @@ using Godot;
 
 namespace Code.Gameplay.Common.Nodes;
 
-[GlobalClass]
 public partial class VisualDebugger2D : Node2D
 {
+#if DEBUG
   private const float CleanDelay = 0.1f;
   
   private List<IDrawCommand> _drawCommands = new();
@@ -55,4 +55,5 @@ public partial class VisualDebugger2D : Node2D
     _drawCommands.Clear();
     QueueRedraw();
   }
+#endif
 }
