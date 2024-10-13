@@ -4,5 +4,5 @@ namespace Code.Projects.Providers.Game;
 
 public interface IGameRootProvider
 {
-  Node Root { get; }
+  Node2D Root { get; }
 }

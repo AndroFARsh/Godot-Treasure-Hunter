@@ -1,7 +1,6 @@
-namespace Code.Infrastructure.Physics
+namespace Code.Infrastructure.Physics;
+
+public interface IEntityResolverFromCollider
 {
-  public interface IEntityResolverFromCollider
-  {
-    TEntity Resolve<TEntity>(int instanceId) where TEntity : class;
-  }
+  TEntity Resolve<TEntity>(ulong instanceId) where TEntity : class;
 }

@@ -3,17 +3,15 @@ using Ninject;
 
 namespace Code.Projects.Providers.Game;
 
-public partial class GameRootRegistrar : Node
+public partial class GameRootRegistrar : Node2D
 {
-  [Export] private Node _root;
-
   private GameRootProvider _provider;
 
   [Inject]
   public void Construct(GameRootProvider provider)
   {
     _provider = provider;
-    _provider.Retain(_root ?? this);
+    _provider.Retain(this);
   }
 
   public override void _Notification(int what)

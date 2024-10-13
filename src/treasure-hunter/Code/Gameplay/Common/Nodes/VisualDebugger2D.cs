@@ -37,6 +37,9 @@ public partial class VisualDebugger2D : Node2D
     bool aligned = true, bool antialiased = false)
     => RequestDraw(new DrawDashedLineCommand(from, to, color, width, dash, aligned, antialiased));
 
+  public void RequestDrawRect(Vector2 center, Vector2 size, Color color, bool filled = false, float width = -1f, bool antialiased = false)
+    => RequestDrawRect(new Rect2(center - size / 2, size), color, filled, width, antialiased);
+  
   public void RequestDrawRect(Rect2 rect, Color color, bool filled = false, float width = -1f, bool antialiased = false)
     => RequestDraw(new DrawRectCommand(rect, color, filled, width, antialiased));
 

@@ -758,9 +758,8 @@ _data = {
 
 [node name="GameScreen" type="Node"]
 
-[node name="GameRoot" type="Node2D" parent="." node_paths=PackedStringArray("_root")]
+[node name="GameRoot" type="Node2D" parent="."]
 script = ExtResource("1_wacbe")
-_root = NodePath(".")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="GameRoot"]
 texture_filter = 1

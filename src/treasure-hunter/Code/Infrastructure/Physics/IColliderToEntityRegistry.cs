@@ -1,11 +1,10 @@
 using Entitas;
 
-namespace Code.Infrastructure.Physics
+namespace Code.Infrastructure.Physics;
+
+public interface IColliderToEntityRegistry
 {
-  public interface IColliderToEntityRegistry
-  {
-    void Register(int instanceId, IEntity entity);
+  void Register(ulong instanceId, IEntity entity);
     
-    void Unregister(int instanceId);
-  }
+  void Unregister(ulong instanceId);
 }
