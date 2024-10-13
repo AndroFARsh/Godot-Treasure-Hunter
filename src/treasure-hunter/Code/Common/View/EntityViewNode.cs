@@ -31,19 +31,18 @@ public partial class EntityViewNode : Node, IEntityView
 
     foreach (IEntityNodeRegistrar registrar in this.FindChildrenOfType<IEntityNodeRegistrar>())
       registrar.Register(_entity);
- 
-    // foreach (Collider2D collider2d in gameObject.GetComponentsInChildren<Collider2D>(true))
-    //   _colliderRegistry.Register(collider2d.GetInstanceID(), _entity);
+
+    foreach (CollisionObject2D collisionObject2D in this.FindChildrenOfType<CollisionObject2D>())
+      _colliderRegistry.Register(collisionObject2D.GetInstanceId(), _entity);
   }
 
   public void Release()
   {
     foreach (IEntityNodeRegistrar registrar in this.FindChildrenOfType<IEntityNodeRegistrar>())
       registrar.Unregister(_entity);
-      
-    //this.FindChildren()
-    // foreach (Collider2D collider2d in gameObject.GetComponentsInChildren<Collider2D>(true))
-    //   _colliderRegistry.Unregister(collider2d.GetInstanceID());
+     
+    foreach (CollisionObject2D collisionObject2D in this.FindChildrenOfType<CollisionObject2D>())
+      _colliderRegistry.Unregister(collisionObject2D.GetInstanceId());
       
     _entity.Release(this);
     _entity = null;

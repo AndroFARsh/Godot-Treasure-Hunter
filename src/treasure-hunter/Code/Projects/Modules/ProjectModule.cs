@@ -110,9 +110,7 @@ namespace Code.Projects.Modules
       binder.Bind<IAudioService>().To<AudioService>().InSingletonScope();
       
       binder.BindInterfacesTo<ColliderToEntityRegistryResolver>().InSingletonScope();
-
-      // builder.Register<ColliderToEntityRegistryResolver>(Lifetime.Singleton).AsImplementedInterfaces();
-      // builder.Register<UnityPhysicsService>(Lifetime.Singleton).As<IPhysicsService>();
+      binder.BindInterfacesTo<GodotPhysicsService>().InSingletonScope();
       
       binder.Bind<IWindowService>().To<WindowService>().InSingletonScope();
     }

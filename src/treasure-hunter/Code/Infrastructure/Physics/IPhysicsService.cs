@@ -1,39 +1,43 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace Code.Infrastructure.Physics
+namespace Code.Infrastructure.Physics;
+
+public struct Hit2D<TEntity> where TEntity : class
 {
-  public interface IPhysicsService
-  {
-    TEntity RayCast<TEntity>(Vector2 worldPosition, Vector2 direction, int layerMask) where TEntity : class;
-    
-    IEnumerable<TEntity> RayCastAll<TEntity>(Vector2 worldPosition, Vector2 direction, int layerMask) where TEntity : class;
-    
-    TEntity LineCast<TEntity>(Vector2 start, Vector2 end, int layerMask) where TEntity : class;
-    
-    IEnumerable<TEntity> LineCastAll<TEntity>(Vector2 start, Vector2 end, int layerMask) where TEntity : class;
-    
-    TEntity CircleCast<TEntity>(Vector2 position, float radius, Vector2 direction, int layerMask) where TEntity : class;
-    
-    IEnumerable<TEntity> CircleCastAll<TEntity>(Vector2 position, float radius, Vector2 direction, int layerMask) where TEntity : class;
+  public TEntity Entity;
+  public Vector2 Position;
+  public Vector2 Normal;
+  public GodotObject Collider;
+  public ulong ColliderId;
+  public int Shape;
+  public Rid Rid;
+}
 
-    TEntity BoxCast<TEntity>(Vector2 position, Vector2 size, float angle, Vector2 direction, int layerMask) where TEntity : class;
-    
-    IEnumerable<TEntity> BoxCastAll<TEntity>(Vector2 position, Vector2 size, float angle, Vector2 direction, int layerMask) where TEntity : class;
-    
-    TEntity OverlapPoint<TEntity>(Vector2 worldPosition, int layerMask) where TEntity : class;
-    IEnumerable<TEntity> OverlapPointAll<TEntity>(Vector2 worldPosition, int layerMask) where TEntity : class;
-   
-    TEntity OverlapCircle<TEntity>(Vector2 worldPos, float radius, int layerMask) where TEntity : class;
-    IEnumerable<TEntity> OverlapCircleAll<TEntity>(Vector2 worldPos, float radius, int layerMask) where TEntity : class;
+public struct Overlap2D<TEntity> where TEntity : class
+{
+  public TEntity Entity;
+  public ulong ColliderId;
+  public Vector2 Position;
+  public Vector2 Normal;
+  public Vector2 LinearVelocity;
+  public int Shape;
+  public Rid Rid;
+}
 
-    TEntity OverlapBox<TEntity>(Vector2 worldPosition, Vector2 size, float angle, int layerMask) where TEntity : class;
-    IEnumerable<TEntity> OverlapBoxAll<TEntity>(Vector2 worldPosition, Vector2 size, float angle, int layerMask) where TEntity : class;
-
-    TEntity OverlapArea<TEntity>(Vector2 worldPosition, Vector2 size, int layerMask) where TEntity : class;
-    IEnumerable<TEntity> OverlapAreaAll<TEntity>(Vector2 worldPosition, Vector2 size, int layerMask) where TEntity : class;
+public interface IPhysicsService
+{
+  Hit2D<TEntity> RayCast<TEntity>(Vector2 worldPosition, Vector2 direction, uint layerMask = uint.MaxValue) where TEntity : class;
     
-    // TEntity OverlapCollider<TEntity>(Collider2D collider, int layerMask) where TEntity : class;
-    // IEnumerable<TEntity> OverlapColliderAll<TEntity>(Collider2D collider, int layerMask) where TEntity : class;
-  }
+  IEnumerable<Hit2D<TEntity>> RayCastAll<TEntity>(Vector2 worldPosition, Vector2 direction, uint layerMask = uint.MaxValue) where TEntity : class;
+    
+  Hit2D<TEntity> LineCast<TEntity>(Vector2 start, Vector2 end, uint layerMask = uint.MaxValue) where TEntity : class;
+    
+  IEnumerable<Hit2D<TEntity>> LineCastAll<TEntity>(Vector2 start, Vector2 end, uint layerMask = uint.MaxValue) where TEntity : class;
+  
+  Overlap2D<TEntity> OverlapCircle<TEntity>(Transform2D transform2D, float radius, uint layerMask = uint.MaxValue) where TEntity : class;
+  IEnumerable<Overlap2D<TEntity>> OverlapCircleAll<TEntity>(Transform2D transform2D, float radius, uint layerMask = uint.MaxValue) where TEntity : class;
+
+  Overlap2D<TEntity> OverlapBox<TEntity>(Transform2D transform2D, Vector2 size, uint layerMask = uint.MaxValue) where TEntity : class;
+  IEnumerable<Overlap2D<TEntity>> OverlapBoxAll<TEntity>(Transform2D transform2D, Vector2 size, uint layerMask = uint.MaxValue) where TEntity : class;
 }

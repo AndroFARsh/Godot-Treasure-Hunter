@@ -397,7 +397,8 @@ _node = NodePath("../CharacterBody2D")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2147483648
-collision_mask = 30719
+collision_mask = 255
+platform_floor_layers = 255
 script = ExtResource("2_1gscp")
 
 [node name="FacingNode2D" type="Node2D" parent="CharacterBody2D"]
